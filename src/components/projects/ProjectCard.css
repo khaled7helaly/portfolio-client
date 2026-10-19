@@ -1,0 +1,259 @@
+/* ========================================
+   PROJECT CARD
+======================================== */
+
+.project-card {
+  min-width: 0;
+  color: var(--bone);
+}
+
+/* ========================================
+   PROJECT PREVIEW
+======================================== */
+
+.project-card__preview {
+  position: relative;
+  width: 100%;
+
+  /* Wide landscape preview */
+  aspect-ratio: 16 / 9;
+
+  overflow: hidden;
+  background: var(--surface);
+  border: 1px solid var(--border);
+}
+
+.project-card__image {
+  display: block;
+  width: 100%;
+  height: 100%;
+
+  /* Show the complete screenshot */
+  object-fit: contain;
+  object-position: center;
+
+  transition: filter 0.3s ease;
+}
+
+.project-card:hover .project-card__image {
+  filter: brightness(1.05);
+}
+
+/* ========================================
+   EMPTY IMAGE PLACEHOLDER
+======================================== */
+
+.project-card__placeholder {
+  position: relative;
+
+  display: flex;
+  width: 100%;
+  height: 100%;
+
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
+  gap: clamp(0.35rem, 1vw, 0.65rem);
+  padding: 0.75rem;
+
+  overflow: hidden;
+
+  background:
+    radial-gradient(
+      circle at 50% 45%,
+      rgba(163, 16, 30, 0.16),
+      transparent 60%
+    ),
+    var(--surface);
+}
+
+.project-card__placeholder::before {
+  content: "";
+
+  position: absolute;
+  inset: clamp(0.5rem, 1.5vw, 0.85rem);
+
+  border: 1px solid rgba(243, 236, 230, 0.08);
+
+  pointer-events: none;
+}
+
+.project-card__placeholder-number {
+  color: var(--red);
+
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 5.5vw, 4.5rem);
+  line-height: 0.85;
+}
+
+.project-card__placeholder-title {
+  max-width: 100%;
+  padding-inline: 0.5rem;
+
+  color: var(--bone);
+
+  font-family: var(--font-body);
+  font-size: clamp(0.7rem, 1.1vw, 0.95rem);
+  font-weight: 800;
+  line-height: 1.4;
+  text-align: center;
+  overflow-wrap: anywhere;
+}
+
+.project-card__placeholder-label {
+  color: var(--muted);
+
+  font-family: var(--font-body);
+  font-size: clamp(0.48rem, 0.6vw, 0.58rem);
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-align: center;
+}
+
+/* ========================================
+   PROJECT INFORMATION
+======================================== */
+
+.project-card__info {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+
+  align-items: center;
+  gap: clamp(0.5rem, 1vw, 0.9rem);
+
+  padding-block: clamp(0.85rem, 1.5vw, 1.1rem);
+
+  border-bottom: 1px solid var(--border);
+}
+
+.project-card__number {
+  color: var(--red-text);
+
+  font-family: var(--font-display);
+  font-size: clamp(2.2rem, 4vw, 3.5rem);
+  font-weight: 400;
+  line-height: 0.85;
+}
+
+.project-card__details {
+  min-width: 0;
+}
+
+.project-card__title {
+  margin: 0 0 0.3rem;
+
+  color: var(--bone);
+
+  font-family: var(--font-body);
+  font-size: clamp(0.78rem, 1.1vw, 1rem);
+  font-weight: 800;
+  line-height: 1.35;
+
+  overflow-wrap: anywhere;
+}
+
+.project-card__category {
+  margin: 0;
+
+  color: var(--muted);
+
+  font-family: var(--font-body);
+  font-size: clamp(0.5rem, 0.68vw, 0.63rem);
+  font-weight: 700;
+  letter-spacing: 0.045em;
+  line-height: 1.6;
+
+  overflow-wrap: anywhere;
+}
+
+/* ========================================
+   DETAILS ARROW
+======================================== */
+
+.project-card__arrow {
+  display: grid;
+
+  width: clamp(2rem, 3vw, 2.35rem);
+  aspect-ratio: 1;
+
+  flex-shrink: 0;
+  place-items: center;
+
+  color: var(--bone);
+
+  border: 1px solid var(--border);
+  text-decoration: none;
+
+  transition:
+    color var(--transition-fast),
+    background-color var(--transition-fast),
+    border-color var(--transition-fast),
+    transform var(--transition-fast);
+}
+
+.project-card__arrow span {
+  font-size: 1.05rem;
+  line-height: 1;
+}
+
+.project-card__arrow:hover {
+  color: var(--bone);
+  background: var(--red);
+  border-color: var(--red);
+
+  transform: translate(2px, -2px);
+}
+
+.project-card__arrow:focus-visible {
+  outline: 2px solid var(--bone);
+  outline-offset: 4px;
+}
+
+/* ========================================
+   SMALL SCREENS
+======================================== */
+
+@media (max-width: 600px) {
+  .project-card__info {
+    gap: 0.65rem;
+    padding-block: 0.9rem;
+  }
+
+  .project-card__number {
+    font-size: 2.5rem;
+  }
+
+  .project-card__title {
+    font-size: 0.85rem;
+  }
+
+  .project-card__category {
+    font-size: 0.56rem;
+  }
+}
+
+@media (max-width: 360px) {
+  .project-card__info {
+    gap: 0.5rem;
+  }
+
+  .project-card__number {
+    font-size: 2.15rem;
+  }
+
+  .project-card__arrow {
+    width: 1.85rem;
+  }
+}
+
+/* ========================================
+   REDUCED MOTION
+======================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .project-card__image,
+  .project-card__arrow {
+    transition: none;
+  }
+}

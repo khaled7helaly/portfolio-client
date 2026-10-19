@@ -1,0 +1,133 @@
+/* View All Projects Card */
+
+.view-all-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+
+  margin-top: clamp(1.5rem, 3vw, 2.5rem);
+  padding: clamp(1.1rem, 2.5vw, 2rem);
+
+  color: var(--bone);
+  text-decoration: none;
+
+  border: 1px solid var(--border);
+
+  background: linear-gradient(
+    105deg,
+    rgba(163, 16, 30, 0.12),
+    rgba(33, 18, 22, 0.35) 50%,
+    transparent
+  );
+
+  transition:
+    border-color var(--transition-normal),
+    background var(--transition-normal);
+}
+
+.view-all-card:hover {
+  border-color: rgba(200, 24, 43, 0.55);
+}
+
+/* Content */
+
+.view-all-card__eyebrow {
+  display: block;
+  margin-bottom: 0.5rem;
+
+  color: var(--red-text);
+  font-family: var(--font-body);
+  font-size: 0.62rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+}
+
+.view-all-card__title {
+  margin: 0;
+
+  color: var(--bone);
+  font-family: var(--font-body);
+  font-size: clamp(1.2rem, 2.4vw, 2rem);
+  font-weight: 800;
+  line-height: 1.25;
+}
+
+.view-all-card__title span {
+  color: var(--red-text);
+}
+
+.view-all-card__description {
+  max-width: 30rem;
+  margin: 0.5rem 0 0;
+
+  color: var(--muted);
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  line-height: 1.7;
+}
+
+/* Action */
+
+.view-all-card__action {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  flex-shrink: 0;
+
+  color: var(--bone);
+  font-family: var(--font-body);
+  font-size: 0.62rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+}
+
+.view-all-card__arrow {
+  display: grid;
+  width: 2.75rem;
+  aspect-ratio: 1;
+  place-items: center;
+
+  color: var(--bone);
+  border: 1px solid var(--border);
+  font-size: 1.2rem;
+
+  transition:
+    color var(--transition-fast),
+    background-color var(--transition-fast),
+    border-color var(--transition-fast),
+    transform var(--transition-fast);
+}
+
+.view-all-card:hover .view-all-card__arrow {
+  color: white;
+  background: var(--red);
+  border-color: var(--red);
+  transform: translate(2px, -2px);
+}
+
+/* Mobile */
+
+@media (max-width: 650px) {
+  .view-all-card {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .view-all-card__action {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .view-all-card__arrow {
+    width: 2.5rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .view-all-card,
+  .view-all-card__arrow {
+    transition: none;
+  }
+}

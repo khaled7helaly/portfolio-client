@@ -1,7 +1,117 @@
-@import './styles/tokens.css';
-@import './styles/global.css';
+/* ========================================
+   GLOBAL DESIGN SYSTEM
+   Khaled Helaly Portfolio
+======================================== */
 
-*{
-    margin: 0px;
-    padding: 0px;
+/* Fonts */
+@import url("https://fonts.googleapis.com/css2?family=Anton&family=Cairo:wght@700;800&family=Herr+Von+Muellerhoff&family=Manrope:wght@500;700;800&display=swap");
+
+
+/* ========================================
+   1. COLORS, FONTS & DESIGN TOKENS
+======================================== */
+
+:root {
+  /* Backgrounds */
+  --bg: #150a0d;
+  --surface: #211216;
+
+  /* Text */
+  --bone: #f3ece6;
+  --muted: rgba(243, 236, 230, 0.6);
+
+  /* Brand colors */
+  --red: #a3101e;
+  --red-deep: #7d0b16;
+  --red-text: #c8182b;
+
+  /* Borders */
+  --border: rgba(243, 236, 230, 0.18);
+
+  /* Fonts */
+  --font-body: "Manrope", system-ui, sans-serif;
+  --font-display: "Anton", Impact, sans-serif;
+  --font-script: "Herr Von Muellerhoff", cursive;
+  --font-arabic: "Cairo", sans-serif;
+
+  /* Layout */
+  --container-width: 1440px;
+  --page-padding: clamp(1.25rem, 4vw, 3.5rem);
+
+  /* Transitions */
+  --transition-fast: 0.2s ease;
+  --transition-normal: 0.3s ease;
+
+  /* Hero-specific color support */
+  --ink: 255, 255, 255;
+}
+
+
+/* ========================================
+   2. GLOBAL RESET
+======================================== */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+
+/* ========================================
+   3. GLOBAL BACKGROUND
+======================================== */
+
+html {
+  min-height: 100%;
+  background-color: var(--bg);
+  scroll-behavior: smooth;
+}
+
+body {
+  min-width: 320px;
+  min-height: 100vh;
+  margin: 0;
+
+  background-color: var(--bg);
+  color: var(--bone);
+  font-family: var(--font-body);
+
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+
+/* ========================================
+   4. MEDIA DEFAULTS
+======================================== */
+
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+::selection {
+  color: var(--bone);
+  background-color: var(--red);
 }
