@@ -1,16 +1,38 @@
-# React + Vite
+# Khaled Mahmoud Helaly — Portfolio (client/)
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+React + Vite + TypeScript portfolio website.
 
-Currently, two official plugins are available:
+## Getting started
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+```bash
+cd client
+npm install
+npm run dev        # http://localhost:5173
+```
 
-## React Compiler
+## Scripts
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+| Command | Purpose |
+|---------|---------|
+| `npm run dev` | Start dev server |
+| `npm run build` | Type-check + production build |
+| `npm run typecheck` | Type-check only (no emit) |
+| `npm run lint` | Run oxlint |
+| `npm run preview` | Preview production build |
 
-## Expanding the Oxlint configuration
+## Before going live — things to supply
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and Oxlint's TypeScript related rules in your project.
+1. **Portrait** — `client/public/images/profile/khaled.webp` (see `public/images/profile/README.md`)
+2. **CV PDF** — `client/public/cv/<name>.pdf`, then set `resumeUrl` in `src/data/profile.ts`
+3. **OG image** — `client/public/og-image.png` (1200×630 px)
+4. **Domain** — set `VITE_SITE_URL` (copy `.env.example` to `.env.local`)
+
+Full checklist: `docs/content-checklist.md` · SEO guide: `docs/seo.md`
+
+## Architecture
+
+See `docs/architecture.md` for the file tree, data-flow rules, and how to add a section.
+
+## Batch status
+
+See `docs/roadmap.md`.
