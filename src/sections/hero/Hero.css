@@ -1,0 +1,127 @@
+/* ── Hero section ─────────────────────────── */
+.hero {
+  min-block-size: 100svh;
+  display: flex;
+  align-items: center;
+}
+
+.hero__content {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: var(--space-12);
+  inline-size: 100%;
+  padding-block: var(--space-20);
+}
+
+/* Text */
+.hero__name {
+  font-family: var(--font-display);
+  font-size: var(--text-display);
+  font-weight: 400;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  color: var(--color-text);
+  margin-block-end: var(--space-4);
+}
+
+.hero__headline {
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  color: var(--color-muted);
+  margin-block-end: var(--space-8);
+  font-weight: 400;
+}
+
+.hero__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-6);
+  flex-wrap: wrap;
+}
+
+.hero__scroll-link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--text-label);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-label);
+  color: var(--color-muted);
+  text-decoration: none;
+  min-block-size: 44px;
+  transition: color var(--dur-fast) var(--ease-out);
+}
+
+.hero__scroll-link:hover,
+.hero__scroll-link:focus-visible {
+  color: var(--color-text);
+}
+
+/* Photo slot (desktop: invisible anchor for the shared photo) */
+.hero__photo-slot {
+  inline-size: clamp(240px, 22vw, 340px);
+  aspect-ratio: 4 / 5;
+  position: relative;
+  flex-shrink: 0;
+}
+
+/* Mobile: direct photo render */
+.hero__photo-direct {
+  inline-size: 100% !important;
+  block-size: 100% !important;
+}
+
+/* ── Entrance animation (load-once) ───────── */
+@media (prefers-reduced-motion: no-preference) {
+  .hero__text,
+  .hero__photo-slot {
+    animation: hero-enter var(--dur-base) var(--ease-out) both;
+  }
+  .hero__photo-slot {
+    animation-delay: 120ms;
+  }
+}
+
+@keyframes hero-enter {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ── Mobile ───────────────────────────────── */
+@media (max-width: 899px), (max-height: 599px) {
+  .hero {
+    min-block-size: 100svh;
+    align-items: flex-start;
+    padding-block-start: 72px; /* clear top bar */
+  }
+
+  .hero__content {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto;
+    gap: var(--space-8);
+    padding-block: var(--space-12);
+  }
+
+  /* Portrait first on mobile */
+  .hero__photo-slot {
+    order: -1;
+    inline-size: 100%;
+    max-block-size: 55svh;
+    aspect-ratio: 4 / 5;
+  }
+
+  .hero__text {
+    order: 1;
+  }
+
+  .hero__name {
+    font-size: clamp(2.25rem, 8vw, 3.5rem);
+  }
+}

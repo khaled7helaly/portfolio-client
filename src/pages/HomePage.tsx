@@ -1,19 +1,25 @@
 import { Seo } from '@/seo/Seo';
+import { buildPersonJsonLd } from '@/seo/structuredData';
+import { IntroStage } from '@/sections/intro/IntroStage';
+import { useProfile } from '@/hooks/useProfile';
 
 /**
- * Home page — assembles all enabled sections.
- * Will be populated with IntroStage, Hero, About and future sections in later milestones.
+ * Home page — assembles the IntroStage (Hero + About) and future sections.
+ * The SEO component updates the document head with the Person JSON-LD.
  */
 export default function HomePage() {
+  const { data: profile } = useProfile();
+
   return (
     <>
-      <Seo />
-      <div style={{
-        minHeight: '100svh', display: 'flex', alignItems: 'center', justifyContent: 'center',
-        fontFamily: 'var(--font-body)', color: 'var(--color-muted)', fontSize: '0.875rem',
-      }}>
-        
-      </div>
+      {profile && (
+        <Seo
+          path="/"
+          jsonLd={buildPersonJsonLd(profile)}
+        />
+      )}
+
+      {profile && <IntroStage profile={profile} />}
     </>
   );
 }

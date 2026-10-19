@@ -1,0 +1,76 @@
+/* ── IntroStage ───────────────────────────── */
+
+/*
+ * The stage wrapper is as tall as 100svh + the runway so the sticky frame
+ * travels the full distance before unsticking.
+ * Ancestors must NOT use overflow: hidden or overflow: auto — use clip instead.
+ */
+.intro-stage {
+  block-size: calc(100svh + var(--intro-runway));
+  position: relative;
+}
+
+/* Sticky 100svh frame */
+.intro-stage__frame {
+  position: sticky;
+  inset-block-start: 0;
+  block-size: 100svh;
+  overflow: clip; /* hides photo overflow without breaking sticky */
+}
+
+/* Layers — stacked in the same grid area */
+.intro-stage__layer {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+}
+
+/* Hero layer: fades out 0→0.35 and drifts up 24px */
+.intro-stage__layer--hero {
+  opacity: calc(1 - min(calc(var(--e) / 0.35), 1));
+  transform: translateY(calc(min(calc(var(--e) / 0.35), 1) * -24px));
+  /* Hero actions become inert after the crossover (p > 0.6) */
+}
+
+/* About layer: fades in 0.35→0.85 and rises 16px */
+.intro-stage__layer--about {
+  opacity: calc(max(calc((var(--e) - 0.35) / 0.5), 0));
+  transform: translateY(calc(max(1 - calc((var(--e) - 0.35) / 0.5), 0) * 16px));
+}
+
+/* Shared photo — absolutely positioned by JS */
+.intro-stage__photo {
+  position: absolute;
+  z-index: 10;
+  transform-origin: top left;
+  /*
+   * At e=0  → hero position (scale=1, no translate)
+   * At e=1  → about position (translate by dx/dy, scale by --photo-scale)
+   * Timeline: photo travels 0→0.65 with ease applied
+   */
+  transform:
+    translate3d(
+      calc(var(--photo-dx) * 1px * var(--e)),
+      calc(var(--photo-dy) * 1px * var(--e)),
+      0
+    )
+    scale(
+      calc(1 + (var(--photo-scale) - 1) * var(--e))
+    );
+  /* Photo above text layers during transition, below when settled */
+  pointer-events: none;
+}
+
+/* Clamp photo travel to 0–0.65 of the ease curve */
+@property --e-photo {
+  syntax: '<number>';
+  inherits: false;
+  initial-value: 0;
+}
+
+/*
+ * Hero actions lose pointer-events as they fade. Rather than invalid CSS,
+ * this is managed via the `inert` attribute toggled by IntroStage.tsx (planned).
+ * At build time we simply disable pointer-events when opacity is near zero.
+ */
