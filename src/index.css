@@ -1,0 +1,7 @@
+@import './styles/tokens.css';
+@import './styles/global.css';
+
+*{
+    margin: 0px;
+    padding: 0px;
+}

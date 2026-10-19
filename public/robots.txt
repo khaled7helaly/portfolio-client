@@ -1,5 +1,0 @@
-User-agent: *
-Allow: /
-
-# Sitemap: https://khaled.dev/sitemap.xml
-# TODO(Khaled): uncomment the Sitemap line once the final URL exists.
