@@ -1,0 +1,65 @@
+/* ==========================================================================
+ * Design Tokens — Khaled Helaly Portfolio
+ * Theme: light only (Batch 1). Add [data-theme="dark"] { ... } block later.
+ *
+ * BREAKPOINTS (use these literals in media queries; keep in sync with lib/media.ts):
+ *   640px  — small (mobile landscape / large phone)
+ *   900px  — medium (tablet / desktop nav rail breakpoint)
+ *   1200px — large (wide desktop)
+ * ========================================================================== */
+
+:root {
+  /* ---------- Colour ---------- */
+  --color-bg:       #F7F5F0;
+  --color-surface:  #FFFFFF;
+  --color-text:     #17191E;
+  --color-muted:    #5A5F6B;
+  --color-line:     #D8D4CA;
+  --color-accent:   #0B6E6E;
+
+  /* ---------- Typography ---------- */
+  /* Fontsource variable fonts — loaded in main.tsx */
+  --font-display: 'Newsreader Variable', Georgia, serif;
+  --font-body:    'Hanken Grotesk Variable', system-ui, sans-serif;
+
+  /* Fluid type scale (display, h2, body, label) */
+  --text-display: clamp(2.5rem,  6vw, 5.25rem);
+  --text-h2:      clamp(1.75rem, 3.5vw, 2.75rem);
+  --text-body:    1.0625rem;
+  --text-label:   0.75rem;
+
+  --tracking-label: 0.14em;
+  --leading-body:   1.6;
+  --prose-max:      65ch;
+
+  /* ---------- Spacing (4px base) ---------- */
+  --space-1:  0.25rem;   /*  4px */
+  --space-2:  0.5rem;    /*  8px */
+  --space-3:  0.75rem;   /* 12px */
+  --space-4:  1rem;      /* 16px */
+  --space-5:  1.25rem;   /* 20px */
+  --space-6:  1.5rem;    /* 24px */
+  --space-8:  2rem;      /* 32px */
+  --space-10: 2.5rem;    /* 40px */
+  --space-12: 3rem;      /* 48px */
+  --space-16: 4rem;      /* 64px */
+  --space-20: 5rem;      /* 80px */
+  --space-24: 6rem;      /* 96px */
+
+  /* ---------- Radius ---------- */
+  --radius-sm: 2px;
+  --radius-md: 4px;
+
+  /* ---------- Layout ---------- */
+  --container:    70rem;       /* max content width */
+  --rail-width:   11rem;       /* desktop nav rail */
+  --intro-runway: 120svh;      /* scroll distance for the intro stage */
+
+  /* ---------- Motion ---------- */
+  --dur-fast: 150ms;
+  --dur-base: 250ms;
+  --ease-out: cubic-bezier(.2, .7, .2, 1);
+}
+
+/* ---------- Future dark theme hook ---------- */
+/* [data-theme="dark"] { ... } — to be added in a later batch */

@@ -1,0 +1,62 @@
+/* ==========================================================================
+ * CSS Reset — opinionated, minimal
+ * ========================================================================== */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  /* Smooth scrolling managed via JS (lib/scroll.ts) to support reduced motion */
+  scroll-behavior: auto;
+}
+
+body {
+  margin: 0;
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  font-size: var(--text-body);
+  line-height: var(--leading-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  /* Prevent overflow from elements wider than the viewport */
+  overflow-x: hidden;
+}
+
+img, video, svg {
+  display: block;
+  max-inline-size: 100%;
+}
+
+ul, ol {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+}
+
+p {
+  margin: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font: inherit;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 0;
+}
+
+input, textarea, select {
+  font: inherit;
+}
