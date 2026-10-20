@@ -1,12 +1,28 @@
-
 /* ========================================
    SELECTED PROJECTS
 ======================================== */
 
 .selected-projects {
+  position: relative;
+  isolation: isolate;
   padding-block: clamp(5rem, 9vw, 8rem);
   padding-inline: var(--page-padding);
   color: var(--bone);
+}
+
+/* خلفية: وهج أحمر من الركن + شبكة خفيفة بتختفي من فوق وتحت */
+.selected-projects::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background-image:
+    radial-gradient(50% 35% at 12% 0%, color-mix(in srgb, var(--red) 30%, transparent), transparent 70%),
+    linear-gradient(rgba(243, 236, 230, 0.022) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(243, 236, 230, 0.01) 1px, transparent 1px);
+  background-size: auto, 64px 64px, 64px 64px;
+  -webkit-mask-image: linear-gradient(180deg, transparent, #000 22%, #000 78%, transparent);
+  mask-image: linear-gradient(180deg, transparent, #00000086 22%, #000 78%, transparent);
 }
 
 .selected-projects__container {
@@ -16,102 +32,123 @@
 }
 
 /* ========================================
-   SECTION HEADER
+   HEADER: عنوان كبير + خط خياطة + تاب مائل
 ======================================== */
 
 .selected-projects__header {
-  display: flex;
+  display: grid;
+  grid-template-columns: auto minmax(2rem, 1fr) auto;
   align-items: center;
-  justify-content: space-between;
-  gap: 2rem;
-  margin-bottom: clamp(2rem, 4vw, 3.5rem);
+  gap: 1rem clamp(1rem, 3vw, 2.5rem);
+  margin-bottom: clamp(2.5rem, 5vw, 4.5rem);
 }
 
-.selected-projects__heading {
-  display: flex;
-  flex: 1;
-  align-items: center;
-  gap: clamp(1rem, 3vw, 2.5rem);
-  min-width: 0;
-}
-
-.selected-projects__heading h2 {
-  flex-shrink: 0;
+.selected-projects__title {
   margin: 0;
-
   color: var(--bone);
-  font-family: var(--font-body);
-  font-size: clamp(1rem, 1.8vw, 1.5rem);
-  font-weight: 800;
-  letter-spacing: 0.06em;
-  line-height: 1.4;
+  font-family: var(--font-display, "Anton", Impact, "Arial Narrow", sans-serif);
+  font-size: clamp(2.6rem, 7vw, 6rem);
+  font-weight: 400;
+  letter-spacing: 0.01em;
+  line-height: 0.95;
+  text-transform: uppercase;
 }
 
+/* نفس خط الخياطة اللي في النافبار */
 .selected-projects__line {
-  flex: 1;
-  min-width: 2rem;
-  height: 1px;
-
-  background: linear-gradient(
-    90deg,
-    var(--red),
-    rgba(243, 236, 230, 0.25),
-    transparent
-  );
+  height: 2px;
+  background: repeating-linear-gradient(90deg, var(--red) 0 8px, transparent 8px 14px);
+  -webkit-mask-image: linear-gradient(90deg, #000 30%, transparent);
+  mask-image: linear-gradient(90deg, #000 30%, transparent);
 }
-
-/* ========================================
-   VIEW ALL HEADER LINK
-======================================== */
 
 .selected-projects__view-all-link {
+  position: relative;
+  isolation: isolate;
   display: inline-flex;
   align-items: center;
   gap: 0.75rem;
-  flex-shrink: 0;
+  padding: 0.9rem 1.7rem;
 
-  color: var(--muted);
+  color: var(--bone);
   font-family: var(--font-body);
-  font-size: 0.7rem;
-  font-weight: 800;
-  letter-spacing: 0.06em;
+  font-size: 0.9rem;
+  font-weight: 700;
   text-decoration: none;
+}
 
-  transition: color var(--transition-fast);
+/* الإطار المائل + التعبئة الحمرا اللي بتتفتح مع الهوفر */
+.selected-projects__view-all-link::before,
+.selected-projects__view-all-link::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  transform: skewX(-20deg);
+}
+.selected-projects__view-all-link::before {
+  border: 1px solid rgba(243, 236, 230, 0.35);
+}
+.selected-projects__view-all-link::after {
+  background: var(--red);
+  transform: skewX(-20deg) scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .selected-projects__view-all-link span {
   color: var(--red-text);
-  font-size: 1.3rem;
-
-  transition: transform var(--transition-fast);
+  font-size: 1.2rem;
+  line-height: 1;
+  transition: transform var(--transition-fast), color var(--transition-fast);
 }
 
-.selected-projects__view-all-link:hover {
+.selected-projects__view-all-link:hover::after,
+.selected-projects__view-all-link:focus-visible::after {
+  transform: skewX(-20deg) scaleX(1);
+}
+.selected-projects__view-all-link:hover span,
+.selected-projects__view-all-link:focus-visible span {
   color: var(--bone);
-}
-
-.selected-projects__view-all-link:hover span {
   transform: translateX(4px);
 }
-
 .selected-projects__view-all-link:focus-visible {
   outline: 2px solid var(--bone);
   outline-offset: 5px;
 }
 
 /* ========================================
-   PROJECT GRID
+   GRID: سلّم نازل بيوصّل للكارت الأخير
 ======================================== */
 
 .selected-projects__grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
+  align-items: start;
   gap: clamp(1rem, 2.2vw, 2rem);
+  margin-bottom: clamp(2rem, 4vw, 3.5rem);
+}
+
+.selected-projects__item {
+  padding-top: 1.25rem;
+  border-top: 1.5px dashed color-mix(in srgb, var(--bone) 22%, transparent);
+  transition: border-color var(--transition-fast), opacity var(--transition-fast);
+}
+.selected-projects__item:nth-child(2) { margin-top: clamp(1.5rem, 4vw, 3.5rem); }
+.selected-projects__item:nth-child(3) { margin-top: clamp(3rem, 8vw, 7rem); }
+
+/* الكارت اللي عليه الماوس أو الفوكس بيتميز وباقي الكروت بتهدى */
+.selected-projects__item:is(:hover, :focus-within) { border-top-color: var(--red); }
+.selected-projects__grid:has(.selected-projects__item:is(:hover, :focus-within))
+  .selected-projects__item:not(:is(:hover, :focus-within)) {
+  opacity: 0.5;
 }
 
 .selected-projects__empty {
-  padding-block: 3rem;
+  margin: 0 0 2rem;
+  padding: 3.5rem 1.5rem;
+  border: 1.5px dashed color-mix(in srgb, var(--bone) 25%, transparent);
+  border-radius: 14px;
   color: var(--muted);
   font-size: 0.9rem;
   text-align: center;
@@ -126,37 +163,23 @@
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 2rem 1.25rem;
   }
+  .selected-projects__item:nth-child(n) { margin-top: 0; }
+  .selected-projects__item:nth-child(2) { margin-top: 2.5rem; }
+}
+
+@media (max-width: 760px) {
+  .selected-projects__header { grid-template-columns: minmax(2rem, 1fr) auto; }
+  .selected-projects__title { grid-column: 1 / -1; }
 }
 
 @media (max-width: 600px) {
-  .selected-projects {
-    padding-block: 4rem;
-  }
-
-  .selected-projects__header {
-    align-items: flex-start;
-    flex-direction: column;
-    gap: 1rem;
-  }
-
-  .selected-projects__heading {
-    width: 100%;
-    gap: 1rem;
-  }
-
-  .selected-projects__heading h2 {
-    font-size: 0.95rem;
-  }
-
-  .selected-projects__grid {
-    grid-template-columns: minmax(0, 1fr);
-    gap: 2rem;
-  }
+  .selected-projects { padding-block: 4rem; }
+  .selected-projects__grid { grid-template-columns: minmax(0, 1fr); gap: 2rem; }
+  .selected-projects__item:nth-child(n) { margin-top: 0; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .selected-projects__view-all-link,
-  .selected-projects__view-all-link span {
-    transition: none;
-  }
+  .selected-projects__item,
+  .selected-projects__view-all-link::after,
+  .selected-projects__view-all-link span { transition: none; }
 }

@@ -1,17 +1,25 @@
 import { useRef } from "react";
 import Navbar from "../../app/layouts/Navbar";
+import LanyardBadge from "../../components/Ui/Lanyardbadge/Lanyardbadge";
+import FeedbackMessage from "../../components/common/FeedbackMessage"
 import "./Hero.css";
 
 /* الصورة من فولدر public — اتأكد من حالة الحروف (Images / Profile) */
-const PHOTO = "/images/profile/khaled.webp";
-const MAX_TILT = 14; // أقصى ميلان بالدرجات
+const PHOTO = "/images/profile/me.webp";
 
-/* كلام الشريطين — عدّله */
-const RIBBON_A = ["Full stack developer", "React & Node.js", "Interfaces that feel fast", "Clean, tested code"];
-const RIBBON_B = ["Open to freelance work", "Let's build your next product", "Say hello", "Portfolio below"];
+/* الكلام المطبوع على الحبلين (الـ lanyard) — عدّله */
+const STRAP_A = ["Full stack developer", "React & Node.js", "Interfaces that feel fast", "Clean, tested code"];
+const STRAP_B = ["Open to freelance work", "Let's build your next product", "Say hello", "Portfolio below"];
 
 /* الجملة الحمرا تحت الاسم — عدّلها (لو تقصد MySQL اكتبها هنا) */
 const ROLE = "I’m a MERN Stack Developer & UI/UX enthusiast.";
+
+/* الكلام اللي على الشارة */
+const BADGE = { name: "Khaled Helaly", role: "MERN Stack Developer", tag: "Portfolio 2026" };
+
+/* ستيكرز على الشارة + الملاحظة بخط اليد تحتها */
+const STICKERS = ["MongoDB", "Express", "React", "Node.js"];
+const HINT = "Pull me!";
 
 /* أعمال مختارة + سوشيال — بيانات تجريبية */
 const WORK = [
@@ -51,43 +59,11 @@ const DownloadIcon = () => (
   </svg>
 );
 
-function Ribbon({ items, variant }) {
-  const loop = Array.from({ length: 4 }, () => items).flat();
-  const group = (hidden) => (
-    <div className="ribbon__group" aria-hidden={hidden || undefined}>
-      {loop.map((text, i) => (
-        <span className="ribbon__item" key={i}>{text}</span>
-      ))}
-    </div>
-  );
-  return (
-    <div className={`ribbon ribbon--${variant}`}>
-      <div className="ribbon__track">{group(false)}{group(true)}</div>
-    </div>
-  );
-}
-
 export default function Hero() {
-  const photoRef = useRef(null);
-
-  const handleMove = (e) => {
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    const el = photoRef.current;
-    const { left, top, width, height } = el.getBoundingClientRect();
-    const x = (e.clientX - left) / width;
-    const y = (e.clientY - top) / height;
-    el.style.setProperty("--ry", `${(x - 0.5) * 2 * MAX_TILT}deg`);
-    el.style.setProperty("--rx", `${(0.5 - y) * 2 * MAX_TILT}deg`);
-    el.style.setProperty("--gx", `${x * 100}%`);
-    el.style.setProperty("--gy", `${y * 100}%`);
-  };
-
-  const handleLeave = () => {
-    ["--rx", "--ry", "--gx", "--gy"].forEach((p) => photoRef.current.style.removeProperty(p));
-  };
+  const heroRef = useRef(null);
 
   return (
-    <section className="hero" id="home">
+    <section className="hero" id="home" ref={heroRef}>
       <Navbar />
       <div className="hero__bg" aria-hidden="true" />
 
@@ -111,31 +87,18 @@ export default function Hero() {
         </div>
 
         <div className="hero__stage">
-          <div className="ribbons" aria-hidden="true">
-            <Ribbon items={RIBBON_A} variant="a" />
-            <Ribbon items={RIBBON_B} variant="b" />
-          </div>
-
-          <div className="hero__photo" ref={photoRef} onMouseMove={handleMove} onMouseLeave={handleLeave}>
-            <div className="hero__tilt">
-              <div className="hero__card">
-                <img src={PHOTO} alt="Khaled" width="800" height="1000" draggable="false" fetchPriority="high" />
-                <span className="hero__glare" />
-              </div>
-            </div>
-          </div>
+          <LanyardBadge
+            photo={PHOTO}
+            alt="Khaled"
+            {...BADGE}
+            straps={[STRAP_A, STRAP_B]}
+            stickers={STICKERS}
+            hint={HINT}
+            ceilingRef={heroRef}
+          />
         </div>
 
-        <aside className="hero__side">
-          <h2>Selected work</h2>
-          <ul className="work">
-            {WORK.map((w) => (
-              <li key={w.name}>
-                <a className="work__row" href="#projects"><b>{w.name}</b><span>{w.meta}</span></a>
-              </li>
-            ))}
-          </ul>
-        </aside>
+  <FeedbackMessage /> 
       </div>
 
       <footer className="hero__foot">

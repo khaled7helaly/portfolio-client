@@ -1,6 +1,22 @@
 import { Link } from "react-router-dom";
 import "./ProjectCard.css";
 
+/* السهم بيتكرر مرتين: واحد بيخرج وواحد بيدخل وقت الـ hover */
+function ArrowIcon() {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path d="M7 17L17 7M8 7h9v9" />
+    </svg>
+  );
+}
+
 export default function ProjectCard({ project }) {
   const {
     number,
@@ -24,7 +40,7 @@ export default function ProjectCard({ project }) {
           />
         ) : (
           <div className="project-card__placeholder">
-            <span className="project-card__placeholder-number">
+            <span className="project-card__placeholder-number" aria-hidden="true">
               {number}
             </span>
 
@@ -55,13 +71,16 @@ export default function ProjectCard({ project }) {
           </p>
         </div>
 
-        {/* Navigate to Project Details */}
+        {/* الـ Link ده بيغطي الكارت كله (stretched link) من الـ CSS */}
         <Link
           className="project-card__arrow"
           to={`/projects/${slug}`}
           aria-label={`View details for ${title}`}
         >
-          <span aria-hidden="true">↗</span>
+          <span className="project-card__arrow-icon" aria-hidden="true">
+            <ArrowIcon />
+            <ArrowIcon />
+          </span>
         </Link>
       </div>
     </article>

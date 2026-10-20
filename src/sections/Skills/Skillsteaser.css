@@ -1,0 +1,92 @@
+/* ───────── Skills teaser (Home) ───────── */
+.teaser {
+  --c-bone: var(--bone, #f3ece6);
+  --c-red: var(--red, #c4182a);
+  --c-hot: var(--red-text, #ff4d5e);
+  --line: rgba(243, 236, 230, 0.18);
+
+  position: relative;
+  overflow: hidden;
+  direction: ltr;
+  padding: 6rem 0 0;
+  color: var(--c-bone);
+  font-family: var(--font-body, "Manrope", system-ui, sans-serif);
+}
+
+.teaser__main {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+  gap: clamp(2rem, 5vw, 5rem);
+  align-items: end;
+  max-width: 76rem;
+  margin: 0 auto;
+  padding: 0 clamp(1.25rem, 4vw, 3.5rem);
+}
+
+.teaser h2 { margin: 0 0 1rem; font: 800 clamp(2.2rem, 4.6vw, 4rem) / 1.12 "Manrope", "Cairo", sans-serif; }
+.teaser__intro p { max-width: 26rem; margin: 0 0 2rem; color: rgba(243, 236, 230, 0.65); line-height: 1.7; }
+
+.teaser__btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  min-height: 3rem;
+  padding: 0 1.5rem;
+  border: 1px solid var(--c-red);
+  border-radius: 999px;
+  background: var(--c-red);
+  color: var(--c-bone);
+  font-size: 0.92rem;
+  font-weight: 700;
+  text-decoration: none;
+  box-shadow: 0 10px 24px -10px rgba(196, 24, 42, 0.8), inset 0 1px 0 rgba(255, 255, 255, 0.25);
+  transition: background 0.25s, translate 0.25s;
+}
+.teaser__btn svg { width: 1.1em; height: 1.1em; transition: translate 0.25s; }
+.teaser__btn:hover { background: #d81e33; }
+.teaser__btn:hover svg { translate: 4px 0; }
+.teaser__btn:active { translate: 0 1px; }
+
+/* قائمة الأقسام: كل سطر بيفتح الصفحة على القسم ده */
+.teaser__list { margin: 0; padding: 0; list-style: none; border-top: 1px solid var(--line); }
+.teaser__list a {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.95rem 0;
+  border-bottom: 1px solid var(--line);
+  color: var(--c-bone);
+  text-decoration: none;
+  transition: padding 0.3s, background 0.3s;
+}
+.teaser__list a:hover { padding-inline: 0.7rem; background: linear-gradient(90deg, var(--c-red), transparent); }
+.teaser__list span { color: rgba(243, 236, 230, 0.55); font-size: 0.85rem; }
+
+/* الشريط المتحرك بأسماء السكيلز */
+.teaser__marquee { margin-top: 4.5rem; padding: 1.4rem 0; overflow: hidden; border-block: 1px solid var(--line); }
+.teaser__track { display: flex; width: max-content; animation: slide 45s linear infinite; }
+.teaser__marquee:hover .teaser__track { animation-play-state: paused; }
+.teaser__track span { display: flex; flex: none; }
+.teaser__track i {
+  padding-inline: 1.6rem;
+  font: 400 clamp(2.2rem, 5vw, 4rem) / 1 "Bebas Neue", "Anton", Impact, sans-serif;
+  letter-spacing: 0.02em;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(243, 236, 230, 0.45);
+  white-space: nowrap;
+}
+.teaser__track i::after { content: "/"; margin-left: 3.2rem; color: var(--c-hot); -webkit-text-stroke: 0; }
+@keyframes slide { to { translate: -50% 0; } }
+
+.teaser__btn:focus-visible,
+.teaser__list a:focus-visible { outline: 2px solid var(--c-bone); outline-offset: 3px; }
+
+@media (max-width: 860px) {
+  .teaser { padding-top: 4.5rem; }
+  .teaser__main { grid-template-columns: 1fr; align-items: start; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .teaser__track { animation: none; }
+  .teaser__marquee { overflow-x: auto; }
+}

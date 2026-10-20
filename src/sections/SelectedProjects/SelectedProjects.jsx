@@ -1,10 +1,9 @@
-
 import { Link } from "react-router-dom";
 
 import { projects } from "../../data/mock/projects.mock";
 
 import ProjectCard from "../../components/projects/ProjectCard";
-import ViewAllCard from "./components/ViewAllCard.jsx/ViewAllCard";
+// import ViewAllCard from "./components/ViewAllCard.jsx/ViewAllCard";
 
 import "./SelectedProjects.css";
 
@@ -18,23 +17,14 @@ export default function SelectedProjects() {
   return (
     <section className="selected-projects" id="projects">
       <div className="selected-projects__container">
-
         {/* Section Header */}
         <header className="selected-projects__header">
-          <div className="selected-projects__heading">
-            <h2>SELECTED PROJECTS</h2>
+          <h2 className="selected-projects__title">Selected projects</h2>
 
-            <span
-              className="selected-projects__line"
-              aria-hidden="true"
-            />
-          </div>
+          <span className="selected-projects__line" aria-hidden="true" />
 
-          <Link
-            className="selected-projects__view-all-link"
-            to="/projects"
-          >
-            VIEW ALL PROJECTS
+          <Link className="selected-projects__view-all-link" to="/projects">
+            View all projects
             <span aria-hidden="true">→</span>
           </Link>
         </header>
@@ -43,21 +33,19 @@ export default function SelectedProjects() {
         {featuredProjects.length > 0 ? (
           <div className="selected-projects__grid">
             {featuredProjects.map((project) => (
-              <ProjectCard
-                key={project.id}
-                project={project}
-              />
+              <div className="selected-projects__item" key={project.id}>
+                <ProjectCard project={project} />
+              </div>
             ))}
           </div>
         ) : (
           <p className="selected-projects__empty">
-            Projects will be available soon.
+            No featured projects yet. Mark a project as featured and published to show it here.
           </p>
         )}
 
         {/* View All Projects Card */}
-        <ViewAllCard />
-
+        {/* <ViewAllCard /> */}
       </div>
     </section>
   );

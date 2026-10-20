@@ -3,8 +3,42 @@
 ======================================== */
 
 .project-card {
+  /* غيّر --card-radius لـ 0 لو عايز الحواف حادة */
+  --card-radius: 20px;
+  --edge: var(--border, rgba(243, 236, 230, 0.16));
+  --edge-strong: rgba(243, 236, 230, 0.34);
+  --ink: var(--bone, #f3ece6);
+  --dim: var(--muted, rgba(243, 236, 230, 0.62));
+  --accent: var(--red, #a3101e);
+  --accent-text: var(--red-text, #c8182b);
+  --out: cubic-bezier(0.22, 1, 0.36, 1);
+
+  position: relative;
+  width: 100%;
   min-width: 0;
-  color: var(--bone);
+
+  color: var(--ink);
+  border-radius: var(--card-radius);
+
+  /* الخطوط والمسافات بتتحسب من عرض الكارت نفسه، مش من عرض الشاشة */
+  container-type: inline-size;
+}
+
+/* خط أحمر بيتّرسم تحت الكارت وقت الـ hover */
+.project-card::after {
+  content: "";
+
+  position: absolute;
+  inset: auto 0 0;
+
+  height: 2px;
+
+  background: var(--accent-text);
+  pointer-events: none;
+
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 0.6s var(--out);
 }
 
 /* ========================================
@@ -13,14 +47,27 @@
 
 .project-card__preview {
   position: relative;
+  isolation: isolate;
+
+  box-sizing: border-box;
   width: 100%;
 
   /* Wide landscape preview */
   aspect-ratio: 16 / 9;
 
   overflow: hidden;
-  background: var(--surface);
-  border: 1px solid var(--border);
+
+  /* شبكة خفيفة زي خلفية الهيرو، بتظهر في أي مساحة فاضية حوالين الصورة */
+  background-color: var(--surface, #211216);
+  background-image:
+    linear-gradient(rgba(243, 236, 230, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(243, 236, 230, 0.04) 1px, transparent 1px);
+  background-size: 28px 28px;
+
+  border: 1px solid var(--edge);
+  border-radius: var(--card-radius);
+
+  transition: border-color 0.35s ease;
 }
 
 .project-card__image {
@@ -31,12 +78,6 @@
   /* Show the complete screenshot */
   object-fit: contain;
   object-position: center;
-
-  transition: filter 0.3s ease;
-}
-
-.project-card:hover .project-card__image {
-  filter: brightness(1.05);
 }
 
 /* ========================================
@@ -45,70 +86,86 @@
 
 .project-card__placeholder {
   position: relative;
+  isolation: isolate;
 
-  display: flex;
+  display: grid;
+  align-content: center;
+  justify-items: center;
+
+  gap: 0.6rem;
   width: 100%;
   height: 100%;
-
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-
-  gap: clamp(0.35rem, 1vw, 0.65rem);
-  padding: 0.75rem;
+  padding: 1rem;
 
   overflow: hidden;
+  text-align: center;
 
-  background:
-    radial-gradient(
-      circle at 50% 45%,
-      rgba(163, 16, 30, 0.16),
-      transparent 60%
-    ),
-    var(--surface);
+  background: radial-gradient(
+    circle at 50% 42%,
+    rgba(163, 16, 30, 0.4),
+    transparent 64%
+  );
 }
 
+/* إطار مخيّط زي شرايط الهيرو */
 .project-card__placeholder::before {
   content: "";
 
   position: absolute;
-  inset: clamp(0.5rem, 1.5vw, 0.85rem);
+  inset: 10px;
 
-  border: 1px solid rgba(243, 236, 230, 0.08);
+  border: 1px dashed rgba(243, 236, 230, 0.2);
+  border-radius: calc(var(--card-radius) - 10px);
 
   pointer-events: none;
 }
 
+/* الرقم شبح كبير ورا الكلام */
 .project-card__placeholder-number {
-  color: var(--red);
+  position: absolute;
+  inset: 0;
+  z-index: -1;
 
-  font-family: var(--font-display);
-  font-size: clamp(2.5rem, 5.5vw, 4.5rem);
-  line-height: 0.85;
+  display: grid;
+  place-items: center;
+
+  color: transparent;
+
+  font-family: var(--font-display, Impact, sans-serif);
+  font-size: 9rem;
+  font-size: clamp(7rem, 52cqi, 15rem);
+  line-height: 1;
+
+  -webkit-text-stroke: 1.5px rgba(243, 236, 230, 0.14);
+  user-select: none;
 }
 
 .project-card__placeholder-title {
   max-width: 100%;
   padding-inline: 0.5rem;
 
-  color: var(--bone);
+  font-family: var(--font-display, Impact, sans-serif);
+  font-size: 1.25rem;
+  font-size: clamp(1rem, 6cqi, 1.8rem);
+  letter-spacing: 0.06em;
+  line-height: 1.1;
+  text-transform: uppercase;
 
-  font-family: var(--font-body);
-  font-size: clamp(0.7rem, 1.1vw, 0.95rem);
-  font-weight: 800;
-  line-height: 1.4;
-  text-align: center;
   overflow-wrap: anywhere;
 }
 
 .project-card__placeholder-label {
-  color: var(--muted);
+  padding: 0.3rem 0.8rem;
 
-  font-family: var(--font-body);
-  font-size: clamp(0.48rem, 0.6vw, 0.58rem);
+  color: var(--dim);
+
+  font-family: var(--font-body, system-ui, sans-serif);
+  font-size: 0.68rem;
   font-weight: 700;
-  letter-spacing: 0.1em;
-  text-align: center;
+  letter-spacing: 0.14em;
+
+  border: 1px dashed var(--edge-strong);
+  border-radius: 999px;
 }
 
 /* ========================================
@@ -120,20 +177,51 @@
   grid-template-columns: auto minmax(0, 1fr) auto;
 
   align-items: center;
-  gap: clamp(0.5rem, 1vw, 0.9rem);
+  gap: 1rem;
+  gap: clamp(0.75rem, 4cqi, 1.25rem);
 
-  padding-block: clamp(0.85rem, 1.5vw, 1.1rem);
+  padding-block: 1.1rem;
+  padding-block: clamp(0.9rem, 4cqi, 1.3rem);
 
-  border-bottom: 1px solid var(--border);
+  border-bottom: 1px dashed var(--edge);
 }
 
+/* الرقم: شريط أحمر مخيّط، نفس لغة شرايط الهيرو */
 .project-card__number {
-  color: var(--red-text);
+  position: relative;
 
-  font-family: var(--font-display);
-  font-size: clamp(2.2rem, 4vw, 3.5rem);
+  display: grid;
+  place-items: center;
+
+  box-sizing: border-box;
+  min-width: 3.4rem;
+  padding: 0.65rem 0.75rem;
+
+  color: #fff;
+  background: var(--accent);
+  border-radius: 6px;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.28),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.22);
+
+  font-family: var(--font-display, Impact, sans-serif);
+  font-size: 1.6rem;
+  font-size: clamp(1.35rem, 7cqi, 1.9rem);
   font-weight: 400;
-  line-height: 0.85;
+  letter-spacing: 0.04em;
+  line-height: 1;
+}
+
+.project-card__number::before {
+  content: "";
+
+  position: absolute;
+  inset: 4px;
+
+  border: 1px dashed rgba(255, 255, 255, 0.4);
+  border-radius: 3px;
+
+  pointer-events: none;
 }
 
 .project-card__details {
@@ -141,14 +229,15 @@
 }
 
 .project-card__title {
-  margin: 0 0 0.3rem;
+  margin: 0 0 0.35rem;
 
-  color: var(--bone);
-
-  font-family: var(--font-body);
-  font-size: clamp(0.78rem, 1.1vw, 1rem);
-  font-weight: 800;
-  line-height: 1.35;
+  font-family: var(--font-display, Impact, sans-serif);
+  font-size: 1.4rem;
+  font-size: clamp(1.15rem, 5.4cqi, 1.75rem);
+  font-weight: 400;
+  letter-spacing: 0.03em;
+  line-height: 1.1;
+  text-transform: uppercase;
 
   overflow-wrap: anywhere;
 }
@@ -156,94 +245,123 @@
 .project-card__category {
   margin: 0;
 
-  color: var(--muted);
+  color: var(--dim);
 
-  font-family: var(--font-body);
-  font-size: clamp(0.5rem, 0.68vw, 0.63rem);
+  font-family: var(--font-body, system-ui, sans-serif);
+  font-size: 0.72rem;
   font-weight: 700;
-  letter-spacing: 0.045em;
-  line-height: 1.6;
+  letter-spacing: 0.12em;
+  line-height: 1.5;
+  text-transform: uppercase;
 
   overflow-wrap: anywhere;
 }
 
 /* ========================================
-   DETAILS ARROW
+   DETAILS ARROW (stretched link)
 ======================================== */
 
 .project-card__arrow {
   display: grid;
-
-  width: clamp(2rem, 3vw, 2.35rem);
-  aspect-ratio: 1;
-
-  flex-shrink: 0;
   place-items: center;
 
-  color: var(--bone);
+  width: 2.75rem;
+  width: clamp(2.5rem, 11cqi, 3rem);
+  aspect-ratio: 1;
+  flex-shrink: 0;
 
-  border: 1px solid var(--border);
+  color: var(--ink);
+
+  border: 1px solid var(--edge-strong);
+  border-radius: 50%;
   text-decoration: none;
 
   transition:
-    color var(--transition-fast),
-    background-color var(--transition-fast),
-    border-color var(--transition-fast),
-    transform var(--transition-fast);
+    background-color 0.3s ease,
+    border-color 0.3s ease;
 }
 
-.project-card__arrow span {
-  font-size: 1.05rem;
-  line-height: 1;
+/* بيغطي الكارت كله، فالكارت كله بقى clickable */
+.project-card__arrow::after {
+  content: "";
+
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+
+  border-radius: var(--card-radius);
 }
 
-.project-card__arrow:hover {
-  color: var(--bone);
-  background: var(--red);
-  border-color: var(--red);
+.project-card__arrow-icon {
+  position: relative;
 
-  transform: translate(2px, -2px);
+  display: block;
+  width: 1.15rem;
+  height: 1.15rem;
+
+  overflow: hidden;
 }
 
-.project-card__arrow:focus-visible {
-  outline: 2px solid var(--bone);
-  outline-offset: 4px;
+.project-card__arrow-icon svg {
+  position: absolute;
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  transition: translate 0.45s var(--out);
+}
+
+.project-card__arrow-icon svg:last-child {
+  translate: -160% 160%;
 }
 
 /* ========================================
-   SMALL SCREENS
+   HOVER + KEYBOARD FOCUS (الكارت كله)
 ======================================== */
 
-@media (max-width: 600px) {
-  .project-card__info {
-    gap: 0.65rem;
-    padding-block: 0.9rem;
-  }
-
-  .project-card__number {
-    font-size: 2.5rem;
-  }
-
-  .project-card__title {
-    font-size: 0.85rem;
-  }
-
-  .project-card__category {
-    font-size: 0.56rem;
-  }
+.project-card:is(:hover, :has(:focus-visible))::after {
+  transform: scaleX(1);
 }
 
-@media (max-width: 360px) {
-  .project-card__info {
-    gap: 0.5rem;
-  }
+.project-card:is(:hover, :has(:focus-visible)) .project-card__preview {
+  border-color: var(--accent-text);
+}
 
-  .project-card__number {
-    font-size: 2.15rem;
+.project-card:is(:hover, :has(:focus-visible)) .project-card__arrow {
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+.project-card:is(:hover, :has(:focus-visible)) .project-card__arrow-icon svg:first-child {
+  translate: 160% -160%;
+}
+
+.project-card:is(:hover, :has(:focus-visible)) .project-card__arrow-icon svg:last-child {
+  translate: 0 0;
+}
+
+/* الـ focus ring حوالين الكارت كله بدل السهم لوحده */
+.project-card__arrow:focus-visible {
+  outline: none;
+}
+
+.project-card:has(.project-card__arrow:focus-visible) {
+  outline: 2px solid var(--ink);
+  outline-offset: 6px;
+}
+
+/* ========================================
+   NARROW CARDS
+======================================== */
+
+@container (max-width: 17rem) {
+  .project-card__placeholder-label {
+    display: none;
   }
 
   .project-card__arrow {
-    width: 1.85rem;
+    width: 2.25rem;
   }
 }
 
@@ -252,8 +370,10 @@
 ======================================== */
 
 @media (prefers-reduced-motion: reduce) {
-  .project-card__image,
-  .project-card__arrow {
+  .project-card::after,
+  .project-card__preview,
+  .project-card__arrow,
+  .project-card__arrow-icon svg {
     transition: none;
   }
 }

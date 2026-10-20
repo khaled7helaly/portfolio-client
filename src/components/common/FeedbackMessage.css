@@ -1,0 +1,429 @@
+/* =========================================
+   COMMUNITY NOTES
+========================================= */
+
+.comments-preview {
+  position: relative;
+  z-index: 2;
+
+  justify-self: end;
+
+  width: min(100%, 23rem);
+
+  color: var(--bone);
+
+  font-family: var(--font-body, "Manrope", sans-serif);
+}
+
+/* =========================================
+   HEADER
+========================================= */
+
+.comments-preview__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 0.75rem;
+
+  margin-bottom: 1.4rem;
+}
+
+.comments-preview__eyebrow {
+  color: var(--red-text);
+
+  font-size: 0.7rem;
+  font-weight: 800;
+
+  letter-spacing: 0.16em;
+}
+
+.comments-preview__indicator {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+
+  color: rgba(243, 236, 230, 0.55);
+
+  font-size: 0.65rem;
+  font-weight: 700;
+
+  letter-spacing: 0.08em;
+}
+
+.comments-preview__indicator > span {
+  width: 6px;
+  height: 6px;
+
+  border-radius: 50%;
+
+  background: #e0283a;
+
+  box-shadow: 0 0 10px rgba(224, 40, 58, 0.5);
+}
+
+/* =========================================
+   TITLE
+========================================= */
+
+.comments-preview__title {
+  max-width: 17ch;
+
+  margin: 0 0 1.5rem;
+
+  color: var(--bone);
+
+  font-family: "Montserrat", "Manrope", sans-serif;
+
+  font-size: clamp(1.5rem, 2vw, 2rem);
+  font-weight: 800;
+
+  line-height: 1.2;
+  letter-spacing: -0.045em;
+}
+
+/* =========================================
+   CONTENT
+========================================= */
+
+.comments-preview__content {
+  min-height: 13rem;
+}
+
+.comments-preview__status {
+  color: rgba(243, 236, 230, 0.6);
+
+  font-size: 0.85rem;
+  line-height: 1.7;
+}
+
+/* =========================================
+   COMMENT CARD
+========================================= */
+
+.comments-preview__card {
+  position: relative;
+
+  padding: 1.25rem;
+
+  border: 1px solid rgba(243, 236, 230, 0.13);
+
+  background: linear-gradient(
+    135deg,
+    rgba(243, 236, 230, 0.065),
+    rgba(21, 10, 13, 0.35)
+  );
+
+  animation: comment-enter 0.5s
+    cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* =========================================
+   AUTHOR
+========================================= */
+
+.comments-preview__author {
+  display: flex;
+  align-items: center;
+
+  gap: 0.75rem;
+
+  margin-bottom: 1.2rem;
+}
+
+.comments-preview__avatar {
+  flex: 0 0 42px;
+
+  width: 42px;
+  height: 42px;
+
+  border: 1px solid rgba(224, 40, 58, 0.65);
+
+  border-radius: 50%;
+
+  object-fit: cover;
+
+  background: rgba(243, 236, 230, 0.08);
+}
+
+.comments-preview__identity {
+  display: flex;
+  flex-direction: column;
+
+  gap: 0.2rem;
+
+  min-width: 0;
+}
+
+.comments-preview__name {
+  overflow: hidden;
+
+  color: var(--bone);
+
+  font-size: 0.9rem;
+  font-weight: 800;
+
+  text-overflow: ellipsis;
+  white-space: nowrap;
+
+  text-decoration: none;
+}
+
+.comments-preview__name:hover {
+  color: var(--red-text);
+}
+
+.comments-preview__username {
+  color: rgba(243, 236, 230, 0.5);
+
+  font-size: 0.75rem;
+}
+
+.comments-preview__github {
+  display: grid;
+  place-items: center;
+
+  margin-left: auto;
+
+  width: 30px;
+  height: 30px;
+
+  border: 1px solid rgba(243, 236, 230, 0.16);
+
+  color: rgba(243, 236, 230, 0.75);
+
+  font-size: 0.65rem;
+  font-weight: 800;
+}
+
+/* =========================================
+   MESSAGE
+========================================= */
+
+.comments-preview__message {
+  margin: 0 0 1.25rem;
+
+  color: rgba(243, 236, 230, 0.9);
+
+  font-size: 0.93rem;
+  font-weight: 500;
+
+  line-height: 1.8;
+
+  overflow-wrap: anywhere;
+}
+
+/* =========================================
+   DATE
+========================================= */
+
+.comments-preview__date {
+  color: rgba(243, 236, 230, 0.45);
+
+  font-size: 0.72rem;
+}
+
+/* =========================================
+   PAGINATION
+========================================= */
+
+.comments-preview__pagination {
+  display: flex;
+  align-items: center;
+
+  gap: 0.35rem;
+
+  margin-top: 1.25rem;
+}
+
+.comments-preview__pagination span {
+  width: 15px;
+  height: 3px;
+
+  background: rgba(243, 236, 230, 0.2);
+
+  transition:
+    width 0.3s ease,
+    background 0.3s ease;
+}
+
+.comments-preview__pagination span.is-active {
+  width: 28px;
+
+  background: var(--red, #a3101e);
+}
+
+/* =========================================
+   EMPTY STATE
+========================================= */
+
+.comments-preview__empty {
+  padding: 1.5rem;
+
+  border: 1px dashed rgba(243, 236, 230, 0.2);
+
+  background: rgba(243, 236, 230, 0.025);
+}
+
+.comments-preview__quote {
+  display: block;
+
+  color: var(--red-text);
+
+  font-family: Georgia, serif;
+
+  font-size: 3rem;
+  line-height: 0.8;
+}
+
+.comments-preview__empty > p {
+  margin: 1rem 0;
+
+  color: var(--bone);
+
+  font-size: 1rem;
+  font-weight: 700;
+
+  line-height: 1.6;
+}
+
+.comments-preview__empty-note {
+  color: rgba(243, 236, 230, 0.5);
+
+  font-size: 0.78rem;
+}
+
+/* =========================================
+   ANGULAR CTA BUTTON
+========================================= */
+
+.comments-preview__button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 2rem;
+
+  width: 100%;
+
+  margin-top: 1.2rem;
+  padding: 1rem 1.2rem;
+
+  border: 1px solid rgba(243, 236, 230, 0.25);
+
+  border-radius: 0;
+
+  clip-path: polygon(
+    4% 0,
+    100% 0,
+    96% 100%,
+    0 100%
+  );
+
+  color: var(--bone);
+
+  background: rgba(243, 236, 230, 0.035);
+
+  font: inherit;
+  font-size: 0.85rem;
+  font-weight: 800;
+
+  text-align: left;
+
+  cursor: pointer;
+
+  transition:
+    background 0.25s ease,
+    border-color 0.25s ease;
+}
+
+.comments-preview__button > span {
+  color: var(--red-text);
+
+  font-size: 1.15rem;
+
+  transition: transform 0.25s ease;
+}
+
+.comments-preview__button:hover {
+  border-color: var(--red);
+
+  background: rgba(163, 16, 30, 0.15);
+}
+
+.comments-preview__button:hover > span {
+  transform: translate(2px, -2px);
+}
+
+/* =========================================
+   FOOTER
+========================================= */
+
+.comments-preview__footer {
+  display: flex;
+  justify-content: space-between;
+
+  gap: 1rem;
+
+  margin-top: 1.2rem;
+  padding-top: 0.8rem;
+
+  border-top: 1px solid rgba(243, 236, 230, 0.12);
+
+  color: rgba(243, 236, 230, 0.4);
+
+  font-size: 0.6rem;
+  font-weight: 700;
+
+  letter-spacing: 0.08em;
+}
+
+/* =========================================
+   ANIMATION
+========================================= */
+
+@keyframes comment-enter {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media (max-width: 1100px) {
+  .comments-preview {
+    justify-self: center;
+
+    width: min(100%, 28rem);
+  }
+}
+
+@media (max-width: 760px) {
+  .comments-preview__title {
+    font-size: 1.6rem;
+  }
+
+  .comments-preview__content {
+    min-height: auto;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .comments-preview__card {
+    animation: none;
+  }
+
+  .comments-preview__button,
+  .comments-preview__button > span,
+  .comments-preview__pagination span {
+    transition: none;
+  }
+}

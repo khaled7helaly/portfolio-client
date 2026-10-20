@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
 import "./About.css";
 
-const PHOTO = "/Images/Profile/khaled.webp";
+const PHOTO = `${import.meta.env.BASE_URL}images/profile/me.webp`;
 
 /* Personal Information */
 const INFO = [

@@ -5,11 +5,12 @@ import "./Navbar.css";
 
 /* IDs must match the section IDs on the homepage */
 const LINKS = [
-  { id: "projects", label: "Work" },
-  { id: "about", label: "About" },
-  { id: "skills", label: "Skills" },
-  { id: "contact", label: "Contact" },
+{ id: "projects", label: "Work", to: "/#projects" },
+{ id: "about", label: "About", to: "/#about" },
+{ id: "skills", label: "Skills", to: "/skills" },
+{ id: "contact", label: "Contact", to: "/#contact" },
 ];
+
 
 export default function Navbar() {
   const barRef = useRef(null);
@@ -130,7 +131,7 @@ export default function Navbar() {
         {LINKS.map((link) => (
           <Link
             key={link.id}
-            to={`/#${link.id}`}
+            to={link.to}
             className="nav__link"
             aria-current={
               location.pathname === "/" && active === link.id
