@@ -5,7 +5,7 @@ import LanyardBadge from "../../components/Ui/Lanyardbadge/Lanyardbadge";
 import "./Hero.css";
 
 /* الصورة من فولدر public — اتأكد من حالة الحروف (Images / Profile) */
-const PHOTO = "/images/profile/me.webp";
+const PHOTO = `${import.meta.env.BASE_URL}images/profile/me.webp`;
 
 /* الكلام المطبوع على الحبلين (الـ lanyard) — عدّله */
 const STRAP_A = ["Full stack developer", "React & Node.js", "Interfaces that feel fast", "Clean, tested code"];
