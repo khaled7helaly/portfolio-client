@@ -1,0 +1,184 @@
+/* ───────── LanyardBadge: شارة معلّقة في lanyard (الحركة في LanyardBadge.jsx) ───────── */
+
+.lanyard__strap,
+.lanyard__badge {
+  opacity: 0;
+  transition: opacity 0.6s ease;
+}
+
+.lanyard.is-live .lanyard__strap,
+.lanyard.is-live .lanyard__badge { opacity: 1; }
+
+.lanyard__strap {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  width: 30px;
+  overflow: hidden;
+  pointer-events: none;
+  transform-origin: 50% 0;
+  will-change: transform;
+  background:
+    linear-gradient(90deg, rgba(0, 0, 0, 0.3), transparent 22%, transparent 78%, rgba(0, 0, 0, 0.3)),
+    var(--red);
+  box-shadow: 0 14px 24px -10px rgba(0, 0, 0, 0.7);
+}
+
+/* خياطة على حرفين الحبل */
+.lanyard__strap::before,
+.lanyard__strap::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  border-left: 2px dashed rgba(255, 255, 255, 0.4);
+}
+.lanyard__strap::before { left: 4px; }
+.lanyard__strap::after { left: calc(100% - 6px); }
+
+.lanyard__strap span {
+  display: block;
+  width: 100%;
+  writing-mode: vertical-rl;
+  white-space: nowrap;
+  color: rgba(255, 255, 255, 0.92);
+  font-family: var(--font-display);
+  font-size: 0.8rem;
+  line-height: 30px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+/* ───────── الشارة (الصورة) ───────── */
+.lanyard {
+  --bw: min(340px, 78vw);
+  position: relative;
+  width: var(--bw);
+  aspect-ratio: 340 / 500;
+  font-size: calc(var(--bw) / 22); /* مقاسات الشارة كلها بالـ em فبتكبر وتصغر مع بعض */
+}
+
+.lanyard__badge {
+  position: absolute;
+  z-index: 2;
+  inset: 0;
+  transform-origin: 50% -44px; /* نقطة التعليق — لازم تساوي PIVOT في الـ JSX */
+  cursor: grab;
+  touch-action: none;
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  will-change: transform;
+}
+
+.lanyard__badge.is-drag { cursor: grabbing; }
+
+.lanyard__card {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border-radius: 1.4em;
+  background: var(--bone);
+  color: #1b0a0d;
+  box-shadow:
+    0 0 0 1.5px rgba(243, 236, 230, 0.7),
+    0 0 90px rgba(163, 16, 30, 0.45),
+    0 44px 70px -26px #000;
+}
+
+/* لمعة بتتحرك مع تأرجح الشارة */
+.lanyard__card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  mix-blend-mode: soft-light;
+  background: linear-gradient(
+    115deg,
+    transparent calc(38% + var(--sh, 0) * 1%),
+    rgba(255, 255, 255, 0.45) calc(50% + var(--sh, 0) * 1%),
+    transparent calc(62% + var(--sh, 0) * 1%)
+  );
+}
+
+.lanyard__slot {
+  position: absolute;
+  top: 0.8em;
+  left: 50%;
+  width: 4.1em;
+  height: 0.8em;
+  translate: -50% 0;
+  border-radius: 999px;
+  background: #150a0c;
+  box-shadow: inset 0 2px 3px rgba(0, 0, 0, 0.6);
+}
+
+.lanyard__photo {
+  position: absolute;
+  inset: 2.3em 0.9em auto;
+  aspect-ratio: 1 / 1.14;
+  overflow: hidden;
+  border-radius: 0.9em;
+  background: radial-gradient(circle at 50% 35%, var(--red), var(--red-deep) 75%);
+}
+
+.lanyard__photo img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  pointer-events: none;
+  user-select: none;
+}
+
+.lanyard__info { position: absolute; inset: auto 1.2em 1em; display: grid; gap: 0.1em; }
+
+.lanyard__info b {
+  font: 800 1.55em/1.1 "Manrope", "Cairo", system-ui, sans-serif;
+  letter-spacing: -0.02em;
+}
+
+.lanyard__info span { color: var(--red-deep); font-size: 0.85em; font-weight: 800; }
+
+.lanyard__row { display: flex; align-items: flex-end; justify-content: space-between; gap: 1em; margin-top: 0.6em; }
+.lanyard__row small { font-size: 0.7em; font-weight: 700; opacity: 0.55; }
+
+.lanyard__bars {
+  flex: 1;
+  max-width: 55%;
+  height: 1.8em;
+  background: repeating-linear-gradient(
+    90deg,
+    #1b0a0d 0 2px, transparent 2px 4px, #1b0a0d 4px 5px, transparent 5px 9px, #1b0a0d 9px 12px, transparent 12px 14px
+  );
+}
+
+/* المشبك المعدن اللي ماسك الحبلين */
+.lanyard__crimp,
+.lanyard__ring { position: absolute; left: 50%; translate: -50% 0; }
+
+.lanyard__crimp {
+  top: -56px;
+  width: 24px;
+  height: 26px;
+  border-radius: 7px;
+  background: linear-gradient(90deg, #7d7873, #f0ebe5 45%, #7d7873);
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.45);
+}
+
+.lanyard__ring {
+  top: -34px;
+  width: 24px;
+  height: 50px;
+  border: 4px solid #d8d2cb;
+  border-radius: 999px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+}
+
+
+@media (prefers-reduced-motion: reduce) {
+  .lanyard__badge { cursor: default; }
+}

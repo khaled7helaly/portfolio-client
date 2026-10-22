@@ -1,0 +1,287 @@
+/* ========================================
+   SERVICE DETAILS (Proposal)
+======================================== */
+
+.details {
+  position: relative;
+  isolation: isolate;
+  min-height: 100vh;
+  padding: clamp(8rem, 12vw, 10rem) var(--page-padding) clamp(4rem, 8vw, 7rem);
+  color: var(--bone);
+}
+
+.details::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background-image:
+    radial-gradient(50% 30% at 12% 0%, color-mix(in srgb, var(--red) 30%, transparent), transparent 70%),
+    linear-gradient(rgba(243, 236, 230, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(243, 236, 230, 0.04) 1px, transparent 1px);
+  background-size: auto, 64px 64px, 64px 64px;
+  -webkit-mask-image: linear-gradient(180deg, #000 60%, transparent);
+  mask-image: linear-gradient(180deg, #000 60%, transparent);
+}
+
+.details__container { width: 100%; max-width: 80rem; margin-inline: auto; }
+
+.details__back {
+  display: inline-flex;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+  color: var(--muted);
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+.details__back:hover { color: var(--bone); }
+.details__back:focus-visible { outline: 2px solid var(--bone); outline-offset: 4px; }
+
+.details__missing h1 {
+  margin: 0 0 0.8rem;
+  font-family: var(--font-display, "Anton", Impact, sans-serif);
+  font-size: clamp(2.4rem, 6vw, 4rem);
+  font-weight: 400;
+  text-transform: uppercase;
+}
+.details__missing p { margin: 0 0 1.5rem; color: var(--muted); font-family: var(--font-body); }
+
+/* ========================================
+   PAPER
+======================================== */
+
+.proposal {
+  --paper: #fff5f2;
+  --ink: #24151a;
+  --ink-muted: #6b5a5e;
+  --rule: rgba(179, 20, 31, 0.4);
+
+  padding: clamp(1.5rem, 5vw, 4rem);
+  border-radius: 4px;
+  color: var(--ink);
+  background: var(--paper);
+  box-shadow: 0 40px 80px -30px rgba(0, 0, 0, 0.8);
+  font-family: var(--font-body);
+}
+
+.proposal__top h1 {
+  margin: 0 0 0.9rem;
+  font-family: var(--font-display, "Anton", Impact, "Arial Narrow", sans-serif);
+  font-size: clamp(2.6rem, 6vw, 4.8rem);
+  font-weight: 400;
+  letter-spacing: 0.01em;
+  line-height: 0.95;
+  text-transform: uppercase;
+}
+.proposal__tagline { margin: 0 0 0.5rem; font-size: 1.15rem; font-weight: 700; }
+.proposal__audience { max-width: 38rem; margin: 0; color: var(--ink-muted); line-height: 1.7; }
+
+.pr-facts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem 3rem;
+  margin: 2rem 0 0;
+  padding-top: 1.5rem;
+  border-top: 2px solid var(--red);
+}
+.pr-facts dt { color: var(--ink-muted); font-size: 0.78rem; }
+.pr-facts dd { margin: 0.2rem 0 0; color: var(--red); font-size: 1.15rem; font-weight: 800; }
+
+.proposal__section { margin-top: clamp(2.5rem, 5vw, 3.5rem); }
+.proposal__section > p { max-width: 44rem; margin: 0; line-height: 1.85; }
+
+.proposal__head {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  margin: 0 0 1.3rem;
+  padding-bottom: 0.9rem;
+  border-bottom: 1.5px dashed var(--rule);
+  font-size: 1.05rem;
+  font-weight: 800;
+}
+.proposal__head i { width: 1rem; height: 1rem; border-radius: 50%; background: var(--red); }
+
+/* ========================================
+   LISTS
+======================================== */
+
+.pr-scope { display: grid; grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr)); gap: 1.8rem 2rem; }
+.pr-scope h3,
+.pr-terms h3 { margin: 0 0 0.7rem; font-size: 0.95rem; font-weight: 800; }
+
+.pr-ticks { display: grid; gap: 0.55rem; margin: 0; padding: 0; list-style: none; font-size: 0.9rem; line-height: 1.55; }
+.pr-ticks li { position: relative; padding-left: 1.4rem; }
+.pr-ticks li::before { content: "✓"; position: absolute; left: 0; color: var(--red); font-weight: 800; }
+.pr-ticks--no { color: var(--ink-muted); }
+.pr-ticks--no li::before { content: "–"; color: var(--ink-muted); }
+
+/* خطوات الشغل: ترتيب حقيقي */
+.pr-flow { display: grid; gap: 1.3rem; margin: 0; padding: 0; list-style: none; counter-reset: flow; }
+.pr-flow li { position: relative; padding-left: 3rem; counter-increment: flow; }
+.pr-flow li::before {
+  content: counter(flow);
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: grid;
+  width: 2rem;
+  aspect-ratio: 1;
+  place-items: center;
+  border-radius: 50%;
+  color: var(--paper);
+  background: var(--ink);
+  font-size: 0.8rem;
+  font-weight: 800;
+}
+.pr-flow li:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  top: 2.3rem;
+  bottom: -1.1rem;
+  left: 1rem;
+  border-left: 1.5px dashed var(--rule);
+}
+.pr-flow b { display: block; font-size: 0.95rem; }
+.pr-flow span { display: block; margin-top: 0.15rem; color: var(--ink-muted); font-size: 0.88rem; line-height: 1.6; }
+
+/* ========================================
+   PACKAGES
+======================================== */
+
+.pr-pkgs { display: grid; grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); gap: 1.1rem; }
+
+.pr-pkg {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: 1.6rem 1.4rem;
+  border: 1px solid #ead9d5;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.5);
+}
+.pr-pkg--popular { border: 2px solid var(--red); background: #fff; }
+
+.pr-pkg__badge {
+  position: absolute;
+  top: -0.8rem;
+  left: 1.2rem;
+  padding: 0.2rem 0.8rem;
+  border-radius: 999px;
+  color: #fff;
+  background: var(--red);
+  font-size: 0.72rem;
+  font-weight: 800;
+}
+
+.pr-pkg h3 {
+  margin: 0 0 0.6rem;
+  font-family: var(--font-display, "Anton", Impact, "Arial Narrow", sans-serif);
+  font-size: 1.6rem;
+  font-weight: 400;
+  line-height: 1;
+  text-transform: uppercase;
+}
+.pr-pkg__price {
+  margin: 0 0 0.9rem;
+  color: var(--red);
+  font-family: var(--font-display, "Anton", Impact, "Arial Narrow", sans-serif);
+  font-size: 2.3rem;
+  line-height: 1;
+}
+.pr-pkg__price small { margin-left: 0.4rem; font: 700 0.8rem var(--font-body); }
+.pr-pkg__meta {
+  display: grid;
+  gap: 0.2rem;
+  margin: 0 0 1.1rem;
+  padding-bottom: 1.1rem;
+  border-bottom: 1.5px dashed var(--rule);
+  color: var(--ink-muted);
+  font-size: 0.85rem;
+}
+
+/* ========================================
+   ADD-ONS / TERMS / FAQ
+======================================== */
+
+.pr-addons { display: grid; margin: 0; padding: 0; list-style: none; }
+.pr-addons li {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.9rem 0;
+  border-bottom: 1.5px dashed var(--rule);
+  font-size: 0.92rem;
+}
+.pr-addons small { display: block; margin-top: 0.15rem; color: var(--ink-muted); font-size: 0.78rem; }
+.pr-addons b { flex-shrink: 0; color: var(--red); font-weight: 800; }
+
+.pr-terms { display: grid; grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr)); gap: 1.6rem 2.5rem; }
+.pr-terms p { margin: 0; color: var(--ink-muted); font-size: 0.9rem; line-height: 1.7; }
+
+.pr-faq details { border-bottom: 1.5px dashed var(--rule); }
+.pr-faq summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem 0;
+  font-size: 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+  list-style: none;
+}
+.pr-faq summary::-webkit-details-marker { display: none; }
+.pr-faq summary::after { content: "+"; color: var(--red); font-size: 1.3rem; line-height: 1; }
+.pr-faq details[open] summary::after { content: "–"; }
+.pr-faq summary:focus-visible { outline: 2px solid var(--red); outline-offset: 2px; }
+.pr-faq details p { max-width: 40rem; margin: 0 0 1.1rem; color: var(--ink-muted); font-size: 0.9rem; line-height: 1.7; }
+
+@media (max-width: 620px) {
+  .pr-facts { gap: 1rem 2rem; }
+  .pr-addons li { flex-direction: column; gap: 0.2rem; }
+}
+
+/* ========================================
+   LAYOUT: الورقة + قسيمة الطلب
+======================================== */
+
+.details__layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 22rem;
+  gap: clamp(1.5rem, 3vw, 2.5rem);
+  align-items: start;
+}
+
+.pr-pkg .pr-ticks { margin-bottom: 1.3rem; }
+.pr-pkg--selected { border-color: var(--red); box-shadow: 0 0 0 3px rgba(179, 20, 31, 0.18); }
+
+.pr-pkg__choose {
+  margin-top: auto;
+  padding: 0.7rem 1rem;
+  border: 1.5px solid var(--red);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--red);
+  font: 700 0.88rem var(--font-body);
+  cursor: pointer;
+  transition: background-color var(--transition-fast), color var(--transition-fast);
+}
+.pr-pkg__choose:hover,
+.pr-pkg__choose[aria-pressed="true"] { background: var(--red); color: #fff; }
+.pr-pkg__choose:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
+
+@media (max-width: 1000px) {
+  .details__layout { grid-template-columns: minmax(0, 1fr); }
+  .details { padding-bottom: 7rem; }
+}
+
+/* تبديل العملة + اسم عنصر الانتقال (الورقة بتكبر من الكارت) */
+.details__bar { display: flex; align-items: center; justify-content: space-between; gap: 1rem; margin-bottom: 1.5rem; }
+.details__bar .details__back { margin-bottom: 0; }
+
+.proposal { view-transition-name: service-paper; }

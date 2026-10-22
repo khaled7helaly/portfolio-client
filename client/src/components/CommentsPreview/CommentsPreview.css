@@ -1,0 +1,95 @@
+/* Hero aside: a slow ticker of the latest comments. */
+.cmt-preview {
+  display: grid;
+  gap: 1rem;
+}
+
+.cmt-preview__head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+/* two classes on purpose: wins over the hero's `.hero__side h2` whatever the import order */
+.cmt-preview .cmt-preview__title {
+  margin: 0;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: rgba(243, 236, 230, 0.6);
+}
+
+.cmt-preview__count {
+  color: rgba(243, 236, 230, 0.45);
+  font-size: 0.8rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.cmt-preview__frame {
+  border-top: 1px solid rgba(243, 236, 230, 0.18);
+}
+
+.cmt-preview__note {
+  margin: 0;
+  padding: 1.1rem 0;
+  border-bottom: 1px solid rgba(243, 236, 230, 0.18);
+  color: rgba(243, 236, 230, 0.6);
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+/* The fade at the top and bottom is a mask, so it works on any page background. */
+.cmt-preview__viewport {
+  height: clamp(16rem, 38vh, 21rem);
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(to bottom, transparent, #000 9%, #000 91%, transparent);
+  mask-image: linear-gradient(to bottom, transparent, #000 9%, #000 91%, transparent);
+}
+
+.cmt-preview__viewport--still {
+  height: auto;
+  -webkit-mask-image: none;
+  mask-image: none;
+}
+
+.cmt-preview__track {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* The list is rendered twice, so moving up by exactly half its height loops without a seam. */
+.cmt-preview__track--ticker {
+  animation: cmt-ticker var(--cmt-duration, 40s) linear infinite;
+}
+
+.cmt-preview__viewport:hover .cmt-preview__track--ticker,
+.cmt-preview__viewport:focus-within .cmt-preview__track--ticker {
+  animation-play-state: paused;
+}
+
+@keyframes cmt-ticker {
+  to {
+    transform: translateY(-50%);
+  }
+}
+
+.cmt-preview > .cmt-btn {
+  justify-self: start;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cmt-preview__track--ticker {
+    animation: none;
+  }
+
+  .cmt-preview__viewport {
+    overflow-y: auto;
+    -webkit-mask-image: none;
+    mask-image: none;
+  }
+
+  .cmt-preview__track .cmt-card[data-copy] {
+    display: none;
+  }
+}

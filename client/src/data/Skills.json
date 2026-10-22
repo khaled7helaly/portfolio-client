@@ -1,0 +1,89 @@
+{
+  "heading": {
+    "title": "The whole MERN stack, from pixels to database.",
+    "text": "Scroll down. Each group has a live demo of how that part of the stack works."
+  },
+  "categories": [
+    {
+      "id": "frontend",
+      "title": "Frontend",
+      "description": "Fast, component-driven interfaces built with React and Next.js.",
+      "demo": { "type": "react", "label": "state → render", "caption": "State changes, and React re-renders only the parts that depend on it." },
+      "skills": [
+        { "name": "React.js", "level": 95, "note": "Hooks, context, custom hooks" },
+        { "name": "Next.js", "level": 90, "note": "App Router, SSR, SSG, ISR" },
+        { "name": "JavaScript ES6+", "level": 92, "note": "Async/await, modules, closures" },
+        { "name": "TypeScript", "level": 80, "note": "Typed props, generics" },
+        { "name": "Redux Toolkit", "level": 85, "note": "Slices, RTK Query" },
+        { "name": "React Query", "level": 82, "note": "Caching, mutations" }
+      ]
+    },
+    {
+      "id": "responsive",
+      "title": "Responsive UI",
+      "description": "Layouts that adapt to every screen, styled with modern CSS.",
+      "demo": { "type": "responsive", "label": "resize", "caption": "One layout on three screens: the grid reflows by itself, no extra breakpoints." },
+      "skills": [
+        { "name": "HTML5 & CSS3", "level": 96, "note": "Semantic, accessible markup" },
+        { "name": "Flexbox & Grid", "level": 94, "note": "auto-fit, minmax, clamp" },
+        { "name": "Mobile-first", "level": 93, "note": "Media & container queries" },
+        { "name": "Tailwind CSS", "level": 90, "note": "Design tokens, variants" },
+        { "name": "Sass / CSS Modules", "level": 88, "note": "Scoped, reusable styles" },
+        { "name": "Framer Motion", "level": 80, "note": "Scroll & layout animation" }
+      ]
+    },
+    {
+      "id": "seo",
+      "title": "SEO & Performance",
+      "description": "Pages that rank, load instantly, and score high on Lighthouse.",
+      "demo": { "type": "seo", "label": "lighthouse", "caption": "Metadata, server rendering and Core Web Vitals lift the score." },
+      "skills": [
+        { "name": "Technical SEO", "level": 90, "note": "Sitemap, robots, canonicals" },
+        { "name": "Meta & Open Graph", "level": 92, "note": "Metadata API, social cards" },
+        { "name": "Structured data", "level": 82, "note": "JSON-LD schema" },
+        { "name": "Core Web Vitals", "level": 88, "note": "LCP, CLS, INP" },
+        { "name": "Asset optimization", "level": 90, "note": "next/image, WebP, lazy load" }
+      ]
+    },
+    {
+      "id": "backend",
+      "title": "Backend",
+      "description": "Clean, secure REST APIs on Node.js and Express.",
+      "demo": { "type": "api", "label": "request flow", "caption": "A request travels through Express, the controller, then MongoDB, and the answer comes back." },
+      "skills": [
+        { "name": "Node.js", "level": 92, "note": "Event loop, streams, modules" },
+        { "name": "Express.js", "level": 92, "note": "Routing, middleware, MVC" },
+        { "name": "REST API design", "level": 93, "note": "Status codes, pagination" },
+        { "name": "Auth & security", "level": 88, "note": "JWT, bcrypt, CORS, Helmet" },
+        { "name": "Validation", "level": 85, "note": "Zod, Joi, error handling" },
+        { "name": "Socket.io", "level": 78, "note": "Real-time events" }
+      ]
+    },
+    {
+      "id": "database",
+      "title": "Database",
+      "description": "Flexible data models in MongoDB, tuned for speed.",
+      "demo": { "type": "database", "label": "mongodb", "caption": "Documents are inserted into a collection as plain JSON-like objects." },
+      "skills": [
+        { "name": "MongoDB", "level": 90, "note": "CRUD, operators, Atlas" },
+        { "name": "Mongoose", "level": 92, "note": "Schemas, hooks, populate" },
+        { "name": "Schema design", "level": 85, "note": "Embedding vs referencing" },
+        { "name": "Aggregation", "level": 82, "note": "$match, $group, $lookup" },
+        { "name": "Indexing", "level": 80, "note": "Compound & text indexes" }
+      ]
+    },
+    {
+      "id": "tools",
+      "title": "Tools & Deployment",
+      "description": "A clean workflow from first commit to live site.",
+      "demo": { "type": "git", "label": "git branch", "caption": "A feature branch grows off main and merges back." },
+      "skills": [
+        { "name": "Git & GitHub", "level": 92, "note": "Branches, PRs, rebase" },
+        { "name": "Postman", "level": 90, "note": "Collections, environments" },
+        { "name": "Vercel & Render", "level": 88, "note": "Env vars, previews" },
+        { "name": "Vite & ESLint", "level": 88, "note": "Fast builds, clean code" },
+        { "name": "Jest & Testing Library", "level": 75, "note": "Unit & component tests" }
+      ]
+    }
+  ]
+}

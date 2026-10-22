@@ -1,0 +1,395 @@
+/* ========================================
+   SKILLS TEASER
+======================================== */
+
+.skills-section {
+  --c-bone: var(--bone, #f3ece6);
+  --c-red: var(--red, #c4182a);
+  --c-hot: var(--red-text, #ff4d5e);
+  --line: rgba(243, 236, 230, 0.18);
+  position: relative;
+  isolation: isolate;
+  padding-block: clamp(5rem, 9vw, 8rem);
+  padding-inline: var(--page-padding);
+  color: var(--c-bone);
+  font-family: var(--font-body, "Manrope", system-ui, sans-serif);
+  direction: ltr;
+}
+
+/* ========================================
+   BACKGROUND
+======================================== */
+
+.skills-section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background-image:
+    radial-gradient(
+      50% 35% at 12% 0%,
+      color-mix(in srgb, var(--c-red) 25%, transparent),
+      transparent 70%
+    ),
+    linear-gradient(
+      rgba(243, 236, 230, 0.022) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      rgba(243, 236, 230, 0.01) 1px,
+      transparent 1px
+    );
+  background-size: auto, 64px 64px, 64px 64px;
+  -webkit-mask-image: linear-gradient(
+    180deg,
+    transparent,
+    #000 18%,
+    #000 82%,
+    transparent
+  );
+  mask-image: linear-gradient(
+    180deg,
+    transparent,
+    #000 18%,
+    #000 82%,
+    transparent
+  );
+  pointer-events: none;
+}
+
+/* ========================================
+   CONTAINER
+   Same layout system as SelectedProjects.
+======================================== */
+
+.skills-section__container {
+  width: 100%;
+  max-width: var(--container-width);
+  margin-inline: auto;
+}
+
+/* ========================================
+   SECTION HEADER
+   Keep SectionHeader component styling unchanged.
+======================================== */
+
+.skills-section__heading {
+  margin-bottom: clamp(2rem, 4vw, 3rem);
+}
+
+.skills-section__script {
+  display: block;
+  width: fit-content;
+  margin: 0 0 0.25rem 0.2rem;
+  color: var(--c-hot);
+  font-family: "Allura", "Kaushan Script", cursive;
+  font-size: clamp(2rem, 3.5vw, 3.1rem);
+  font-weight: 400;
+  line-height: 1;
+  transform: rotate(-5deg);
+  transform-origin: left center;
+}
+
+/* ========================================
+   CONTENT LAYOUT
+======================================== */
+
+.skills-section__content {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+  align-items: center;
+  gap: clamp(2rem, 5vw, 5rem);
+  width: 100%;
+}
+
+.skills-section__copy {
+  min-width: 0;
+}
+
+.skills-section__intro {
+  max-width: 38rem;
+  margin: 0 0 1.25rem;
+  color: rgba(243, 236, 230, 0.68);
+  font-size: clamp(0.95rem, 1.2vw, 1.05rem);
+  line-height: 1.8;
+}
+
+/* ========================================
+   STRATEGY / EXECUTION / REFINEMENT
+======================================== */
+
+.skills-section__list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--line);
+}
+
+.skills-section__item {
+  display: grid;
+  grid-template-columns: 1.75rem minmax(0, 1fr);
+  align-items: start;
+  gap: 0.85rem;
+  padding: 0.8rem 0;
+  border-bottom: 1px solid var(--line);
+  transition:
+    padding var(--transition-fast, 0.25s ease),
+    border-color var(--transition-fast, 0.25s ease);
+}
+
+.skills-section__item:hover {
+  padding-inline: 0.35rem;
+  border-bottom-color: var(--c-red);
+}
+
+.skills-section__number {
+  padding-top: 0.2rem;
+  color: var(--c-hot);
+  font-family: "Manrope", sans-serif;
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+}
+
+.skills-section__item-content {
+  min-width: 0;
+}
+
+.skills-section__item h3 {
+  margin: 0 0 0.25rem;
+  color: var(--c-bone);
+  font-size: clamp(1.05rem, 1.7vw, 1.25rem);
+  font-weight: 800;
+  line-height: 1.4;
+}
+
+.skills-section__item h3 span {
+  color: var(--c-hot);
+}
+
+.skills-section__item p {
+  max-width: 34rem;
+  margin: 0;
+  color: rgba(243, 236, 230, 0.61);
+  font-size: 0.88rem;
+  line-height: 1.7;
+}
+
+/* ========================================
+   SIDE IMAGE
+   No frame or border — glow behind image.
+======================================== */
+
+.skills-section__visual {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+  width: 100%;
+  max-width: 28rem;
+  justify-self: end;
+  isolation: isolate;
+}
+
+.skills-section__visual::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: -1;
+  width: 80%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: var(--c-red);
+  opacity: 0.28;
+  filter: blur(85px);
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+
+.skills-section__image {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 36rem;
+  object-fit: contain;
+  object-position: center;
+  background: transparent;
+  transition: transform 0.5s ease;
+}
+
+.skills-section__visual:hover .skills-section__image {
+  transform: translateY(-4px);
+}
+
+/* ========================================
+   FULL-WIDTH SKILLS MARQUEE
+======================================== */
+
+.skills-section .teaser__marquee {
+  width: 100vw;
+  margin-top: clamp(3.5rem, 6vw, 4.5rem);
+  margin-left: calc(50% - 50vw);
+  padding: 1.4rem 0;
+  overflow: hidden;
+  border-block: 1px solid var(--line);
+}
+
+.skills-section .teaser__track {
+  display: flex;
+  width: max-content;
+  animation: skills-slide 20s linear infinite;
+}
+
+.skills-section .teaser__marquee:hover .teaser__track {
+  animation-play-state: paused;
+}
+
+.skills-section .teaser__track span {
+  display: flex;
+  flex: none;
+  align-items: center;
+}
+
+.skills-section .teaser__track i {
+  padding-inline: 1.6rem;
+  color: transparent;
+  font-family: "Bebas Neue", "Anton", Impact, sans-serif;
+  font-size: clamp(2.2rem, 5vw, 4rem);
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+  -webkit-text-stroke: 1px rgba(243, 236, 230, 0.45);
+}
+
+.skills-section .teaser__track i::after {
+  content: "/";
+  margin-left: 3.2rem;
+  color: var(--c-hot);
+  -webkit-text-stroke: 0;
+}
+
+@keyframes skills-slide {
+  to {
+    translate: -50% 0;
+  }
+}
+
+/* ========================================
+   RESPONSIVE
+======================================== */
+
+@media (max-width: 900px) {
+  .skills-section__content {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 0.85fr);
+    gap: 2rem;
+  }
+
+  .skills-section__item {
+    gap: 0.65rem;
+    padding-block: 0.7rem;
+  }
+
+  .skills-section__item p {
+    font-size: 0.84rem;
+  }
+
+  .skills-section__visual::before {
+    filter: blur(65px);
+  }
+
+  .skills-section .teaser__track {
+    animation-duration: 18s;
+  }
+}
+
+@media (max-width: 760px) {
+  .skills-section__content {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 2rem;
+  }
+
+  .skills-section__visual {
+    width: 100%;
+    max-width: 25rem;
+    justify-self: center;
+  }
+
+  .skills-section__image {
+    max-height: 30rem;
+  }
+
+  .skills-section__visual::before {
+    width: 75%;
+    opacity: 0.3;
+    filter: blur(60px);
+  }
+}
+
+@media (max-width: 600px) {
+  .skills-section {
+    padding-block: 4rem;
+  }
+
+  .skills-section__heading {
+    margin-bottom: 2rem;
+  }
+
+  .skills-section__script {
+    font-size: 2.2rem;
+  }
+
+  .skills-section__intro {
+    margin-bottom: 1rem;
+    font-size: 0.92rem;
+  }
+
+  .skills-section__item {
+    padding-block: 0.75rem;
+  }
+
+  .skills-section__item p {
+    font-size: 0.86rem;
+  }
+
+  .skills-section .teaser__marquee {
+    margin-top: 3rem;
+    padding-block: 1.2rem;
+  }
+
+  .skills-section .teaser__track {
+    animation-duration: 16s;
+  }
+
+  .skills-section .teaser__track i {
+    padding-inline: 1rem;
+    font-size: clamp(2rem, 9vw, 3rem);
+  }
+
+  .skills-section .teaser__track i::after {
+    margin-left: 2rem;
+  }
+}
+
+/* ========================================
+   ACCESSIBILITY
+======================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .skills-section .teaser__track {
+    animation: none;
+  }
+
+  .skills-section .teaser__marquee {
+    overflow-x: auto;
+  }
+
+  .skills-section__item,
+  .skills-section__image {
+    transition: none;
+  }
+}
