@@ -1,0 +1,65 @@
+/* نافذة ديمو داكنة جوه الورقة الكريمي */
+
+.demo-slot {
+  margin: 0;
+  overflow: hidden;
+  border-radius: 10px;
+  background: #1d0f13;
+  box-shadow: 0 24px 50px -28px rgba(36, 21, 26, 0.9);
+  color: var(--bone, #f3ece6);
+  font-family: var(--font-body);
+}
+
+.demo-slot__bar {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.7rem 1rem;
+  border-bottom: 1px solid rgba(243, 236, 230, 0.12);
+}
+.demo-slot__bar i { width: 0.6rem; height: 0.6rem; border-radius: 50%; background: rgba(243, 236, 230, 0.22); }
+.demo-slot__bar i:first-child { background: var(--red, #a3101e); }
+.demo-slot__bar span {
+  margin-left: 0.6rem;
+  padding: 0.2rem 0.8rem;
+  border-radius: 999px;
+  background: rgba(243, 236, 230, 0.07);
+  color: rgba(243, 236, 230, 0.6);
+  font: 600 0.72rem ui-monospace, monospace;
+}
+
+/* هيكل صفحة بسيط */
+.demo-slot__body {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 0.7rem;
+  padding: 1.2rem;
+}
+.demo-slot__body i { height: 3.2rem; border-radius: 6px; background: rgba(243, 236, 230, 0.08); }
+.demo-slot__body .demo-slot__hero {
+  grid-column: 1 / -1;
+  height: 5.5rem;
+  background: linear-gradient(120deg, var(--red, #a3101e), rgba(163, 16, 30, 0.2));
+}
+
+.demo-slot figcaption {
+  padding: 0.9rem 1.1rem;
+  border-top: 1px solid rgba(243, 236, 230, 0.12);
+  color: rgba(243, 236, 230, 0.7);
+  font-size: 0.85rem;
+}
+.demo-slot a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--bone, #f3ece6);
+  font-weight: 700;
+  text-decoration: none;
+}
+.demo-slot a span { color: var(--red-text, #ff4d5e); font-size: 1.1rem; }
+.demo-slot a:hover { text-decoration: underline; text-underline-offset: 4px; }
+.demo-slot a:focus-visible { outline: 2px solid var(--bone, #f3ece6); outline-offset: 4px; }
+
+@media (max-width: 620px) {
+  .demo-slot__body { grid-template-columns: 1fr 1fr; }
+}

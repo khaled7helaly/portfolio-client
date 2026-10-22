@@ -1,11 +1,11 @@
 import { useRef } from "react";
 import Navbar from "../../app/layouts/Navbar";
 import LanyardBadge from "../../components/Ui/Lanyardbadge/Lanyardbadge";
-import FeedbackMessage from "../../components/common/FeedbackMessage"
+// import { CommentsPreview } from "../../features/comments";
 import "./Hero.css";
 
 /* الصورة من فولدر public — اتأكد من حالة الحروف (Images / Profile) */
-const PHOTO = `${import.meta.env.BASE_URL}images/profile/me.webp`;
+const PHOTO = "/images/profile/me.webp";
 
 /* الكلام المطبوع على الحبلين (الـ lanyard) — عدّله */
 const STRAP_A = ["Full stack developer", "React & Node.js", "Interfaces that feel fast", "Clean, tested code"];
@@ -21,12 +21,7 @@ const BADGE = { name: "Khaled Helaly", role: "MERN Stack Developer", tag: "Portf
 const STICKERS = ["MongoDB", "Express", "React", "Node.js"];
 const HINT = "Pull me!";
 
-/* أعمال مختارة + سوشيال — بيانات تجريبية */
-const WORK = [
-  { name: "Project one", meta: "Web app" },
-  { name: "Project two", meta: "E-commerce" },
-  { name: "Project three", meta: "Dashboard" },
-];
+/* سوشيال */
 const SOCIALS = [
   { label: "GitHub", href: "https://github.com/" },
   { label: "LinkedIn", href: "https://linkedin.com/" },
@@ -98,7 +93,9 @@ export default function Hero() {
           />
         </div>
 
-  <FeedbackMessage /> 
+        <aside className="hero__side">
+          {/* <CommentsPreview /> */}
+        </aside>
       </div>
 
       <footer className="hero__foot">

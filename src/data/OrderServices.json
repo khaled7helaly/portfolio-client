@@ -1,0 +1,115 @@
+{
+  "siteUrl": "https://your-domain.com",
+  "currency": { "code": "EGP", "label": "EGP", "pricing": "from", "usd": { "enabled": true, "rate": 50 } },
+  "whatsapp": {
+    "number": "20XXXXXXXXXX",
+    "noAddons": "بدون إضافات",
+    "template": "أهلاً خالد، حابب أطلب خدمة من موقعك.\n\nالخدمة: {service}\nالباقة: {package} ({days} يوم)\nالإضافات: {addons}\nالإجمالي: يبدأ من {total} جنيه\n\nالاسم: {name}\nرقم التواصل: {contact}\nفكرة المشروع: {description}\nالموعد المطلوب: {deadline}\n\nالبروبوزال: {link}"
+  },
+  "process": [
+    { "step": "Brief", "text": "A short chat to understand your goal, audience, and content." },
+    { "step": "Proposal and deposit", "text": "You confirm the scope and package, pay the deposit, and I lock your start date." },
+    { "step": "Design preview", "text": "You see the layout before I build it, so changes are cheap and fast." },
+    { "step": "Build", "text": "Clean, responsive code with a progress update every few days." },
+    { "step": "Review", "text": "You test the work and send your revisions, included per package." },
+    { "step": "Launch and handover", "text": "Final payment, source files, and free bug fixes after launch." }
+  ],
+  "terms": [
+    { "title": "Payment", "text": "50% deposit to start and 50% before final handover. Projects above 20,000 EGP are split into three milestones: 40%, 30%, 30%." },
+    { "title": "Payment methods", "text": "Instapay, Vodafone Cash, or bank transfer." },
+    { "title": "Timeline", "text": "Delivery days start after the deposit and once I receive your content (texts, logo, images). Late content moves the delivery date by the same number of days." },
+    { "title": "Revisions", "text": "Each package includes a set number of revision rounds. A round is one consolidated list of changes. Extra rounds cost 300 EGP each." },
+    { "title": "Scope changes", "text": "Anything outside the agreed scope is quoted separately before any work on it starts." },
+    { "title": "Ownership", "text": "Full ownership of the code and design transfers to you after the final payment." },
+    { "title": "Hosting and domains", "text": "Domain, hosting, and third-party service fees are paid by you directly. I can deploy for you as an add-on." },
+    { "title": "After launch", "text": "14 days of free bug fixes. Bug fixes cover errors in what I built, not new requests." },
+    { "title": "Cancellation", "text": "If you cancel after kickoff, the deposit is non-refundable and covers the work already done. If I cannot deliver, you get a full refund." }
+  ],
+  "faq": [
+    { "q": "Do I need to have my content ready?", "a": "Yes. Texts, logo, and images are needed before the build starts. I can advise on structure and wording." },
+    { "q": "Can I upgrade my package later?", "a": "Yes. You pay the price difference and the timeline is adjusted." },
+    { "q": "Will it work on mobile?", "a": "Every project is built responsive and tested on phones, tablets, and desktops." },
+    { "q": "Do you provide hosting?", "a": "I deploy to hosting that you own, and I can recommend options that fit your budget." },
+    { "q": "What if I need something that is not listed?", "a": "Send me the idea and I will quote it separately." }
+  ],
+  "services": [
+    {
+      "slug": "landing-page",
+      "title": "Landing & personal page",
+      "tagline": "One clear page that introduces you or sells your offer.",
+      "featured": true,
+      "audience": "Freelancers, personal brands, and small businesses that need a strong first impression.",
+      "overview": "A fast, responsive single page that tells people who you are, what you offer, and how to reach you. Built with React and designed around one goal: getting visitors to contact you.",
+      "scope": [
+        { "group": "Design", "items": ["Custom layout, not a template", "Your colors and logo", "Mobile-first responsive design"] },
+        { "group": "Sections", "items": ["Hero and about", "Services or projects", "Testimonials and FAQ", "Contact section"] },
+        { "group": "Technical", "items": ["React with clean CSS", "Fast loading and optimized images", "Contact form to WhatsApp or email"] }
+      ],
+      "outOfScope": ["Writing the copy or taking photos", "Logo and brand identity design", "Domain and hosting fees"],
+      "packages": [
+        { "id": "personal", "name": "Personal", "price": 2500, "days": 4, "revisions": 2, "popular": false, "features": ["1 page, up to 4 sections", "Responsive design", "Social links and contact buttons", "Basic on-page SEO"] },
+        { "id": "landing", "name": "Landing", "price": 4500, "days": 6, "revisions": 3, "popular": true, "features": ["1 page, up to 8 sections", "Custom design with light animations", "Contact form to WhatsApp or email", "Basic on-page SEO"] },
+        { "id": "landing-plus", "name": "Landing Plus", "price": 7500, "days": 9, "revisions": 4, "popular": false, "features": ["Up to 3 pages", "Custom design with animations", "Contact form and analytics", "On-page SEO and sitemap", "Deployment and domain connection", "30 days of bug fixes"] }
+      ],
+      "addons": [
+        { "id": "rtl", "name": "Arabic / RTL version", "price": 800 },
+        { "id": "extra-section", "name": "Extra section", "price": 400 },
+        { "id": "seo", "name": "SEO setup (meta, sitemap, speed)", "price": 600, "includedIn": ["landing-plus"] },
+        { "id": "deploy", "name": "Deploy and connect domain", "price": 500, "includedIn": ["landing-plus"] }
+      ],
+      "demo": { "label": "Live demo", "url": "" }
+    },
+    {
+      "slug": "frontend-project",
+      "title": "Front-end project",
+      "tagline": "A polished React interface for your small project or existing API.",
+      "featured": false,
+      "audience": "Founders and teams with an idea, a design, or an API who need the interface built.",
+      "overview": "A multi-page React interface built from your idea or design, ready to connect to your API. Ideal for small projects, MVP screens, and redesigns.",
+      "scope": [
+        { "group": "Design", "items": ["Page layouts from your idea or Figma file", "Reusable component system", "Responsive on all screens"] },
+        { "group": "App", "items": ["React with routing", "Forms with validation", "REST API integration with loading and error states"] },
+        { "group": "Quality", "items": ["Accessible and keyboard friendly", "Clean, organized code", "Production build ready to deploy"] }
+      ],
+      "outOfScope": ["Back-end and database work", "Logo and brand identity design", "Content writing"],
+      "packages": [
+        { "id": "small", "name": "Small", "price": 6000, "days": 7, "revisions": 2, "popular": false, "features": ["Up to 3 pages", "Responsive UI", "Forms with validation", "Production build ready to deploy"] },
+        { "id": "standard", "name": "Standard", "price": 12000, "days": 14, "revisions": 3, "popular": true, "features": ["Up to 6 pages", "Reusable component system", "REST API integration", "Login and register screens", "Accessibility checks"] },
+        { "id": "pro", "name": "Pro", "price": 20000, "days": 21, "revisions": 4, "popular": false, "features": ["Up to 10 pages", "State management and protected routes", "Dashboard screens with tables and charts", "Performance optimization", "30 days of bug fixes"] }
+      ],
+      "addons": [
+        { "id": "extra-page", "name": "Extra page", "price": 700 },
+        { "id": "dark-mode", "name": "Dark / light mode", "price": 900 },
+        { "id": "rtl", "name": "Arabic / RTL support", "price": 1500 },
+        { "id": "deploy", "name": "Deploy and connect domain", "price": 500 }
+      ],
+      "demo": { "label": "Live demo", "url": "" }
+    },
+    {
+      "slug": "mern-project",
+      "title": "Back-end & MERN project",
+      "tagline": "From a secure API to a complete full-stack product.",
+      "featured": false,
+      "audience": "Small businesses and startups that need a working system, not only a design.",
+      "overview": "Node, Express, and MongoDB for the server, with React on the front when you need it. Choose an API only, a full MVP, or a complete platform with an admin dashboard.",
+      "scope": [
+        { "group": "Back-end", "items": ["REST API with Express", "MongoDB schemas and validation", "JWT authentication and user roles"] },
+        { "group": "Front-end", "items": ["React interface (MVP and Platform)", "Admin dashboard (Platform)", "Forms, tables, and search"] },
+        { "group": "Delivery", "items": ["API documentation", "Environment setup guide", "Deployment guide"] }
+      ],
+      "outOfScope": ["Mobile apps", "Third-party subscription fees", "Ongoing server management"],
+      "packages": [
+        { "id": "api", "name": "API only", "price": 12000, "days": 14, "revisions": 2, "popular": false, "features": ["Express and MongoDB", "Up to 6 collections", "JWT authentication", "Postman collection and API docs"] },
+        { "id": "mvp", "name": "MVP", "price": 24000, "days": 24, "revisions": 3, "popular": true, "features": ["API and React interface", "User auth with roles", "Up to 8 collections", "CRUD screens with search and filters", "Deployment guide"] },
+        { "id": "platform", "name": "Platform", "price": 45000, "days": 40, "revisions": 4, "popular": false, "features": ["Everything in MVP", "Admin dashboard", "File uploads and email notifications", "Up to 15 collections", "Tests for core flows", "30 days of bug fixes"] }
+      ],
+      "addons": [
+        { "id": "payments", "name": "Payment gateway integration", "price": 3500 },
+        { "id": "email", "name": "Email notifications", "price": 1500, "includedIn": ["platform"] },
+        { "id": "deploy", "name": "Deploy to a VPS or cloud", "price": 1500 },
+        { "id": "support", "name": "Extra month of support", "price": 2000 }
+      ],
+      "demo": { "label": "Live demo", "url": "" }
+    }
+  ]
+}

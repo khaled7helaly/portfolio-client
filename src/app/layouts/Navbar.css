@@ -56,7 +56,7 @@
   transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
 }
 .nav__link:hover::before,
-.nav__link[aria-current="true"]::before { transform: skewX(-24deg) scaleX(1); }
+.nav__link[aria-current]::before { transform: skewX(-24deg) scaleX(1); }
 
 .nav__cta {
   padding: 0.7rem 1.4rem;
@@ -137,3 +137,6 @@
   .nav[data-open="true"] .nav__links { display: flex; }
   .nav__link { padding: 0.9rem 1rem; }
 }
+
+/* النافبار ثابت وماينعملوش كروس فيد وقت الانتقال */
+.nav { view-transition-name: site-nav; }
