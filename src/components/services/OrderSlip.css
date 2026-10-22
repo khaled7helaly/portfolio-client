@@ -1,0 +1,156 @@
+/* ========================================
+   ORDER SLIP: قسيمة داكنة جنب الورقة الكريمي
+======================================== */
+
+.slip {
+  position: sticky;
+  top: 7rem;
+  padding: 1.6rem 1.4rem;
+  border: 1px solid rgba(243, 236, 230, 0.14);
+  border-radius: 6px;
+  background: #1d0f13;
+  box-shadow: 0 40px 80px -30px rgba(0, 0, 0, 0.85);
+  color: var(--bone);
+  font-family: var(--font-body);
+}
+
+.slip h2 {
+  margin: 0 0 1.2rem;
+  font-family: var(--font-display, "Anton", Impact, "Arial Narrow", sans-serif);
+  font-size: 1.8rem;
+  font-weight: 400;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.slip__group { margin: 0 0 1.2rem; padding: 0; border: 0; }
+.slip__group legend { margin-bottom: 0.5rem; padding: 0; color: var(--muted); font-size: 0.8rem; font-weight: 600; }
+
+.slip__option {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 0.7rem;
+  padding: 0.65rem 0;
+  border-bottom: 1px dashed rgba(243, 236, 230, 0.16);
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+.slip__option small { display: block; color: var(--muted); font-size: 0.75rem; }
+.slip__option b { font-size: 0.85rem; font-weight: 800; }
+.slip__option input { width: 1.05rem; height: 1.05rem; accent-color: var(--red); }
+.slip__option input:disabled + span { color: var(--muted); }
+.slip__option:has(input:focus-visible) { outline: 2px solid var(--bone); outline-offset: 2px; }
+
+/* الإجمالي */
+.slip__total { margin: 0 0 1.3rem; padding-top: 1rem; border-top: 1.5px dashed rgba(243, 236, 230, 0.3); }
+.slip__total div { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; padding: 0.2rem 0; font-size: 0.88rem; }
+.slip__total dt { color: var(--muted); }
+.slip__total dd { margin: 0; font-weight: 700; }
+.slip__sum { font-family: var(--font-display, "Anton", Impact, sans-serif); font-size: 2.3rem; font-weight: 400 !important; line-height: 1; }
+.slip__sum small { margin-left: 0.4rem; font: 700 0.8rem var(--font-body); color: var(--muted); }
+.slip__usd { color: var(--muted); font-size: 0.8rem; font-weight: 500 !important; }
+
+/* الفورم */
+.slip__form { display: grid; gap: 0.9rem; padding-top: 1.3rem; border-top: 1.5px dashed rgba(243, 236, 230, 0.3); }
+.slip__form label { display: grid; gap: 0.35rem; color: var(--muted); font-size: 0.8rem; font-weight: 600; }
+.slip__form input,
+.slip__form textarea {
+  width: 100%;
+  padding: 0.7rem 0.8rem;
+  border: 1px solid rgba(243, 236, 230, 0.18);
+  border-radius: 6px;
+  background: rgba(243, 236, 230, 0.05);
+  color: var(--bone);
+  font: 500 0.9rem var(--font-body);
+  resize: vertical;
+}
+.slip__form input::placeholder { color: rgba(243, 236, 230, 0.35); }
+.slip__form input:focus-visible,
+.slip__form textarea:focus-visible { border-color: var(--bone); outline: 2px solid var(--bone); outline-offset: 1px; }
+
+/* زرار الإرسال: مائل بنفس لغة النافبار */
+.slip__submit {
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  place-items: center;
+  margin-top: 0.4rem;
+  padding: 0.95rem 1rem;
+  border: 0;
+  background: none;
+  color: #fff;
+  font: 800 0.92rem var(--font-body);
+  text-decoration: none;
+  cursor: pointer;
+}
+.slip__submit::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: var(--red);
+  transform: skewX(-12deg);
+  transition: filter var(--transition-fast);
+}
+.slip__submit:hover::before { filter: brightness(1.2); }
+.slip__submit:focus-visible { outline: 2px solid var(--bone); outline-offset: 4px; }
+
+.slip__hint { margin: 0; color: var(--muted); font-size: 0.76rem; line-height: 1.6; text-align: center; }
+
+.slip__done { padding-top: 1.3rem; border-top: 1.5px dashed rgba(243, 236, 230, 0.3); }
+.slip__done h3 { margin: 0 0 0.5rem; font-size: 1.05rem; }
+.slip__done p { margin: 0 0 1rem; color: var(--muted); font-size: 0.85rem; line-height: 1.7; }
+.slip__row { display: flex; gap: 0.6rem; margin-top: 1rem; }
+.slip__row button {
+  flex: 1;
+  padding: 0.65rem;
+  border: 1px solid rgba(243, 236, 230, 0.25);
+  border-radius: 999px;
+  background: none;
+  color: var(--bone);
+  font: 700 0.82rem var(--font-body);
+  cursor: pointer;
+}
+.slip__row button:hover { background: rgba(243, 236, 230, 0.07); }
+.slip__row button:focus-visible { outline: 2px solid var(--bone); outline-offset: 3px; }
+
+/* شريط الإجمالي: موبايل بس */
+.slip-bar { display: none; }
+
+@media (max-width: 1000px) {
+  .slip { position: static; }
+
+  .slip-bar {
+    position: fixed;
+    inset: auto 0 0;
+    z-index: 40;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.8rem var(--page-padding);
+    border-top: 1px solid rgba(243, 236, 230, 0.14);
+    background: rgba(21, 10, 13, 0.94);
+    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
+    color: var(--bone);
+    font-family: var(--font-body);
+  }
+  .slip-bar small { display: block; color: var(--muted); font-size: 0.72rem; }
+  .slip-bar b { font-size: 1rem; font-weight: 800; }
+  .slip-bar a {
+    padding: 0.7rem 1.6rem;
+    border-radius: 999px;
+    background: var(--red);
+    color: #fff;
+    font-size: 0.9rem;
+    font-weight: 800;
+    text-decoration: none;
+  }
+  .slip-bar a:focus-visible { outline: 2px solid var(--bone); outline-offset: 3px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .slip__submit::before { transition: none; }
+}

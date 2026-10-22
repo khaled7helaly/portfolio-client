@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 
 import { projects } from "../../data/mock/projects.mock";
-
+import SectionHeader from "../../components/SectionHeader/SectionHeader";
 import ProjectCard from "../../components/projects/ProjectCard";
 // import ViewAllCard from "./components/ViewAllCard.jsx/ViewAllCard";
 
@@ -18,16 +18,11 @@ export default function SelectedProjects() {
     <section className="selected-projects" id="projects">
       <div className="selected-projects__container">
         {/* Section Header */}
-        <header className="selected-projects__header">
-          <h2 className="selected-projects__title">Selected projects</h2>
-
-          <span className="selected-projects__line" aria-hidden="true" />
-
-          <Link className="selected-projects__view-all-link" to="/projects">
-            View all projects
-            <span aria-hidden="true">→</span>
-          </Link>
-        </header>
+        <SectionHeader
+          title="Selected projects"
+          actionLabel="View all projects"
+          actionTo="/projects"
+        />
 
         {/* Featured Projects */}
         {featuredProjects.length > 0 ? (

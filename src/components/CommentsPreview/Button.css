@@ -1,0 +1,71 @@
+/* Same pill language as the hero buttons. */
+.cmt-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  min-height: 3rem;
+  padding: 0 1.4rem;
+  border: 1px solid rgba(243, 236, 230, 0.3);
+  border-radius: 999px;
+  background: rgba(243, 236, 230, 0.04);
+  color: var(--bone);
+  font: inherit;
+  font-size: 0.92rem;
+  font-weight: 700;
+  line-height: 1;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background 0.25s, border-color 0.25s, box-shadow 0.25s, translate 0.25s;
+}
+
+.cmt-btn svg {
+  flex: none;
+  width: 1.1em;
+  height: 1.1em;
+}
+
+.cmt-btn:hover:not(:disabled) {
+  border-color: var(--bone);
+  background: rgba(243, 236, 230, 0.08);
+}
+
+.cmt-btn:active:not(:disabled) {
+  translate: 0 1px;
+}
+
+.cmt-btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.cmt-btn:focus-visible {
+  outline: 2px solid var(--bone);
+  outline-offset: 3px;
+}
+
+.cmt-btn--solid {
+  border-color: var(--red);
+  background: var(--red);
+  box-shadow:
+    0 10px 24px -10px rgba(196, 24, 42, 0.8),
+    inset 0 1px 0 rgba(255, 255, 255, 0.25);
+}
+
+.cmt-btn--solid:hover:not(:disabled) {
+  border-color: #c4182a;
+  background: #c4182a;
+}
+
+.cmt-btn--small {
+  min-height: 2.4rem;
+  padding: 0 1rem;
+  gap: 0.5rem;
+  font-size: 0.82rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cmt-btn {
+    transition: none;
+  }
+}
