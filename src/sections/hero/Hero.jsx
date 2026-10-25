@@ -1,34 +1,46 @@
 import { useRef } from "react";
 import Navbar from "../../app/layouts/Navbar";
 import LanyardBadge from "../../components/Ui/Lanyardbadge/Lanyardbadge";
-// import { CommentsPreview } from "../../features/comments";
 import "./Hero.css";
-
-/* الصورة من فولدر public — اتأكد من حالة الحروف (Images / Profile) */
+// import cv from '../../../public/cv/khaled_helaly_CV.pdf'
 const PHOTO = "/images/profile/me.webp";
 
-/* الكلام المطبوع على الحبلين (الـ lanyard) — عدّله */
-const STRAP_A = ["Full stack developer", "React & Node.js", "Interfaces that feel fast", "Clean, tested code"];
-const STRAP_B = ["Open to freelance work", "Let's build your next product", "Say hello", "Portfolio below"];
+const STRAP_A = [
+  "Full stack developer",
+  "React & Node.js",
+  "Interfaces that feel fast",
+  "Clean, tested code",
+];
 
-/* الجملة الحمرا تحت الاسم — عدّلها (لو تقصد MySQL اكتبها هنا) */
+const STRAP_B = [
+  "Open to freelance work",
+  "Let's build your next product",
+  "Say hello",
+  "Portfolio below",
+];
+
 const ROLE = "I’m a MERN Stack Developer & UI/UX enthusiast.";
 
-/* الكلام اللي على الشارة */
-const BADGE = { name: "Khaled Helaly", role: "MERN Stack Developer", tag: "Portfolio 2026" };
+const BADGE = {
+  name: "Khaled Helaly",
+  role: "MERN Stack Developer",
+  tag: "Portfolio 2026",
+};
 
-/* ستيكرز على الشارة + الملاحظة بخط اليد تحتها */
 const STICKERS = ["MongoDB", "Express", "React", "Node.js"];
 const HINT = "Pull me!";
 
-/* سوشيال */
 const SOCIALS = [
-  { label: "GitHub", href: "https://github.com/" },
-  { label: "LinkedIn", href: "https://linkedin.com/" },
-  { label: "Email", href: "mailto:hello@example.com" },
+  {
+    label: "GitHub",
+    href: "https://github.com/khaled7helaly",
+  },
+  {
+    label: "LinkedIn",
+    href: "https://www.linkedin.com/in/khaledhelaly7/",
+  },
 ];
 
-/* أيقونات الزراير */
 const iconProps = {
   viewBox: "0 0 24 24",
   fill: "none",
@@ -60,31 +72,41 @@ export default function Hero() {
   return (
     <section className="hero" id="home" ref={heroRef}>
       <Navbar />
+
       <div className="hero__bg" aria-hidden="true" />
 
       <div className="hero__main">
         <div className="hero__intro">
           <h1 className="hero__title">
             <span className="hero__hello">Hello, I am</span>{" "}
-            <span className="hero__name" lang="ar">Khaled Helaly </span>
+            <span className="hero__name" lang="en">
+              Khaled Helaly
+            </span>
           </h1>
+
           <p className="hero__role">{ROLE}</p>
+
           <div className="hero__cta">
             <a className="btn btn--solid" href="#projects">
               <GridIcon />
-              View projects
+              <span>View projects</span>
             </a>
-            <a className="btn btn--ghost" href="/Khaled-CV.pdf" download>
-              <DownloadIcon />
-              Download CV
-            </a>
+
+          <a
+            className="btn btn--ghost"
+            href="public/cv/khaled_helaly_CV.pdf"
+            download="khaled_helaly_CV.pdf"
+          >
+            <DownloadIcon />
+            <span>Download CV</span>
+          </a>
           </div>
         </div>
 
         <div className="hero__stage">
           <LanyardBadge
             photo={PHOTO}
-            alt="Khaled"
+            alt="Khaled Helaly"
             {...BADGE}
             straps={[STRAP_A, STRAP_B]}
             stickers={STICKERS}
@@ -93,16 +115,24 @@ export default function Hero() {
           />
         </div>
 
-        <aside className="hero__side">
-          {/* <CommentsPreview /> */}
-        </aside>
+        <aside className="hero__side" />
       </div>
 
       <footer className="hero__foot">
         <nav aria-label="Social links">
-          {SOCIALS.map((s) => <a key={s.label} href={s.href}>{s.label}</a>)}
+          {SOCIALS.map(({ label, href }) => (
+            <a
+              key={label}
+              href={href}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {label}
+            </a>
+          ))}
         </nav>
-        <small>© 2026 Khaled</small>
+
+        <small>© {new Date().getFullYear()} Khaled Helaly</small>
       </footer>
     </section>
   );

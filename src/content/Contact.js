@@ -3,10 +3,13 @@
    الترتيب هنا هو ترتيب القايمة: أول اتنين بيبانوا على طول، والباقي بيظهر بالسكرول. */
 
 /* رقم الواتساب بصيغة دولية من غير + ولا صفر في الأول. مثال: 201012345678 */
-const WHATSAPP = "";
+const WHATSAPP = "201276539981";
 
 export const CONTACT = {
   email: "helalykhaled3@gmail.com",
+  /* لينك الفورم من Formspree، شكله: https://formspree.io/f/xxxxxxx
+     من غيره الفورم مش هتبعت إيميل لوحدها */
+  formEndpoint: "",
   channels: [
     { label: "LinkedIn", handle: "", href: "https://linkedin.com/" }, // حط لينك بروفايلك
     { label: "GitHub", handle: "", href: "https://github.com/" }, // حط لينك بروفايلك

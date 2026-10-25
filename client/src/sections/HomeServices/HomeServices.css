@@ -1,0 +1,118 @@
+/* ========================================
+   HOME SERVICES (Order a service)
+======================================== */
+
+.home-services {
+  padding-block: clamp(5rem, 9vw, 8rem);
+  padding-inline: var(--page-padding);
+  color: var(--bone);
+}
+
+.home-services__container {
+  width: 100%;
+  max-width: var(--container-width);
+  margin-inline: auto;
+}
+
+/* ========================================
+   HEADER
+======================================== */
+
+.home-services__header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 2rem;
+  margin-bottom: clamp(2.5rem, 5vw, 4rem);
+}
+
+.home-services__header h2 {
+  margin: 0 0 0.9rem;
+  font-family: var(--font-display, "Anton", Impact, "Arial Narrow", sans-serif);
+  font-size: clamp(2.6rem, 6vw, 5rem);
+  font-weight: 400;
+  letter-spacing: 0.01em;
+  line-height: 0.95;
+  text-transform: uppercase;
+}
+
+.home-services__header p {
+  max-width: 30rem;
+  margin: 0;
+  color: var(--muted);
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  line-height: 1.8;
+}
+
+/* تاب مائل زي زرار View all في المشاريع */
+.home-services__all {
+  position: relative;
+  isolation: isolate;
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.9rem 1.7rem;
+  color: var(--bone);
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  font-weight: 700;
+  text-decoration: none;
+}
+.home-services__all::before,
+.home-services__all::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  transform: skewX(-20deg);
+}
+.home-services__all::before { border: 1px solid rgba(243, 236, 230, 0.35); }
+.home-services__all::after {
+  background: var(--red);
+  transform: skewX(-20deg) scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.home-services__all span {
+  color: var(--red-text);
+  font-size: 1.2rem;
+  line-height: 1;
+  transition: transform var(--transition-fast), color var(--transition-fast);
+}
+.home-services__all:hover::after,
+.home-services__all:focus-visible::after { transform: skewX(-20deg) scaleX(1); }
+.home-services__all:hover span,
+.home-services__all:focus-visible span { color: var(--bone); transform: translateX(4px); }
+.home-services__all:focus-visible { outline: 2px solid var(--bone); outline-offset: 5px; }
+
+/* ========================================
+   GRID
+======================================== */
+
+.home-services__grid {
+  display: grid;
+  grid-template-columns: 1.35fr 1fr 1fr;
+  gap: clamp(1rem, 2.4vw, 2rem);
+}
+
+/* ========================================
+   RESPONSIVE
+======================================== */
+
+@media (max-width: 960px) {
+  .home-services__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .paper--featured { grid-column: 1 / -1; }
+}
+
+@media (max-width: 620px) {
+  .home-services { padding-block: 4rem; }
+  .home-services__header { align-items: flex-start; flex-direction: column; gap: 1.5rem; }
+  .home-services__grid { grid-template-columns: minmax(0, 1fr); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .home-services__all::after,
+  .home-services__all span { transition: none; }
+}

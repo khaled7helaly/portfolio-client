@@ -1,0 +1,42 @@
+/* اختيار طريقة الإرسال: Email / WhatsApp (بيتحط جنب Contact.css) */
+
+.contact__mode {
+  display: inline-flex;
+  justify-self: start;
+  padding: 0.25rem;
+  border: 1px solid rgba(243, 236, 230, 0.4);
+  border-radius: 999px;
+  background: rgba(21, 10, 13, 0.35);
+}
+
+.contact__mode button {
+  min-height: 2.25rem;
+  padding: 0 1.2rem;
+  border: 0;
+  border-radius: 999px;
+  background: none;
+  color: inherit;
+  font: 700 0.85rem var(--font-b, "Manrope", system-ui, sans-serif);
+  cursor: pointer;
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+.contact__mode button:not([aria-pressed="true"]):hover {
+  background: rgba(21, 10, 13, 0.5);
+}
+
+.contact__mode button[aria-pressed="true"] {
+  background: var(--ink, #f3e6e6);
+  color: var(--red-2, #7d0b16);
+}
+
+.contact__hint {
+  margin: -0.4rem 0 0;
+  color: rgba(243, 236, 230, 0.8);
+  font-size: 0.85rem;
+  line-height: 1.6;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .contact__mode button { transition: none; }
+}

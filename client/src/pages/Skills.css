@@ -1,0 +1,240 @@
+/* ───────── Skills ───────── */
+@property --px { syntax: "<integer>"; initial-value: 1280; inherits: true; }
+@property --w  { syntax: "<percentage>"; initial-value: 100%; inherits: true; }
+@property --p  { syntax: "<integer>"; initial-value: 0; inherits: true; }
+
+.skills {
+  --c-bone: var(--bone, #f3ece6);
+  --c-red: var(--red, #c4182a);
+  --c-hot: var(--red-text, #ff4d5e);
+  --line: rgba(243, 236, 230, 0.14);
+  --dim: rgba(243, 236, 230, 0.62);
+
+  position: relative;
+  isolation: isolate;
+  overflow: clip;
+  direction: ltr;
+  padding: 7rem clamp(1.25rem, 4vw, 3.5rem) 6rem;
+  color: var(--c-bone);
+  font-family: var(--font-body, "Manrope", system-ui, sans-serif);
+}
+
+/* نفس كلمة الخلفية العملاقة بتاعت الهيرو */
+.skills::before {
+  content: "SKILLS";
+  position: absolute;
+  top: 6rem;
+  left: 50%;
+  z-index: -1;
+  translate: -50% 0;
+  rotate: -8deg;
+  font: 900 clamp(12rem, 30vw, 34rem) / 0.8 "Bebas Neue", "Anton", Impact, sans-serif;
+  letter-spacing: -0.025em;
+  color: rgba(243, 236, 230, 0.025);
+  -webkit-text-stroke: 1px rgba(243, 236, 230, 0.055);
+  pointer-events: none;
+}
+
+/* شريط التقدّم */
+.skills__rail {
+  position: absolute;
+  inset: 9rem auto 4rem clamp(0.6rem, 1.6vw, 1.6rem);
+  width: 2px;
+  border-radius: 2px;
+  background: var(--line);
+}
+.skills__rail::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(var(--c-hot), var(--c-red));
+  box-shadow: 0 0 14px var(--c-red);
+  transform-origin: top;
+  transform: scaleY(var(--progress, 0));
+}
+
+.skills__head { max-width: 44rem; margin: 0 auto 6rem; text-align: center; }
+.skills__head h2 { margin: 0 0 1rem; font: 800 clamp(2.3rem, 5vw, 4.2rem) / 1.12 "Manrope", sans-serif; }
+.skills__head p { margin: 0; color: var(--dim); font-size: 1.05rem; line-height: 1.7; }
+
+/* ───────── كاتيجوري: نص + ديمو (بيتبدلوا يمين وشمال) ───────── */
+.cat {
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+  gap: clamp(1.5rem, 4vw, 4rem);
+  align-items: start;
+  max-width: 76rem;
+  margin: 0 auto 7rem;
+}
+.cat:nth-of-type(even) .demo { order: -1; }
+
+.cat h3 { margin: 0 0 0.6rem; font: 800 clamp(2rem, 3.4vw, 3rem) / 1.1 "Manrope", sans-serif; }
+.cat__info > p { max-width: 30rem; margin: 0 0 1.8rem; color: var(--dim); line-height: 1.7; }
+
+.chips { display: grid; gap: 0.7rem; margin: 0; padding: 0; list-style: none; }
+.chips li {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 0.2rem 1rem;
+  padding: 0.9rem 1.1rem 1.15rem;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 1rem;
+  background: rgba(243, 236, 230, 0.035);
+}
+.chips b { font-size: 1rem; }
+.chips span { display: block; margin-top: 0.15rem; color: rgba(243, 236, 230, 0.5); font-size: 0.82rem; }
+.chips em { align-self: center; color: var(--c-hot); font-size: 0.9rem; font-style: normal; font-weight: 800; }
+
+/* البار بيتملي لما الكاتيجوري تظهر */
+.bar { position: absolute; inset: auto 0 0; height: 3px; background: rgba(243, 236, 230, 0.08); }
+.bar::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, var(--c-red), var(--c-hot));
+  transform-origin: left;
+  transform: scaleX(0);
+  transition: transform 1.1s cubic-bezier(0.2, 0.8, 0.2, 1) calc(var(--i) * 80ms);
+}
+.is-live .bar::after { transform: scaleX(var(--lv)); }
+
+/* ───────── لوحة الديمو ───────── */
+.demo {
+  position: sticky;
+  top: 7rem;
+  margin: 0;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 1.4rem;
+  background: rgba(14, 10, 11, 0.6);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 40px 90px -45px rgba(196, 24, 42, 0.8);
+}
+.demo__bar { display: flex; align-items: center; gap: 0.4rem; padding: 0.8rem 1rem; border-bottom: 1px solid var(--line); }
+.demo__bar i { width: 0.65rem; height: 0.65rem; border-radius: 50%; background: rgba(243, 236, 230, 0.2); }
+.demo__bar i:first-child { background: var(--c-red); }
+.demo__bar span { margin-left: auto; color: rgba(243, 236, 230, 0.5); font: 600 0.75rem ui-monospace, monospace; }
+.demo__body { display: grid; place-items: center; min-height: 18rem; padding: 1.6rem; }
+.demo__body > * { width: 100%; }
+.demo figcaption { padding: 1rem 1.2rem; border-top: 1px solid var(--line); color: var(--dim); font-size: 0.88rem; line-height: 1.6; }
+
+.d-api code, .d-db code, .node { font: 600 0.82rem ui-monospace, monospace; }
+.d-api code, .d-db code { color: var(--dim); }
+.d-api em, .d-db em { color: var(--c-hot); font-style: normal; }
+
+/* React: الـ state بيتغير والمكونات بتنور */
+.d-tree { display: grid; justify-items: center; gap: 1.1rem; }
+.node { position: relative; padding: 0.6rem 1.1rem; border: 1px solid var(--line); border-radius: 0.7rem; background: rgba(243, 236, 230, 0.05); }
+.node + .node::before { content: ""; position: absolute; bottom: 100%; left: 50%; height: 1.1rem; border-left: 1px dashed rgba(243, 236, 230, 0.3); }
+.node--hot { animation: hot 1.4s ease-out; }
+@keyframes hot {
+  0% { scale: 1.06; border-color: var(--c-hot); background: var(--c-red); box-shadow: 0 0 28px var(--c-red); }
+}
+
+/* Responsive: العرض بيصغر والجريد بيعيد ترتيب نفسه */
+.d-resp { animation: rs 8s ease-in-out infinite; }
+@keyframes rs {
+  0%, 15% { --px: 1280; --w: 100%; }
+  35%, 50% { --px: 768; --w: 62%; }
+  70%, 85% { --px: 375; --w: 30%; }
+  100% { --px: 1280; --w: 100%; }
+}
+.d-px { display: block; margin-bottom: 0.8rem; text-align: center; color: var(--c-hot); font: 700 0.8rem ui-monospace, monospace; counter-reset: px var(--px); }
+.d-px::after { content: counter(px) "px"; }
+.d-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(4rem, 1fr));
+  gap: 0.6rem;
+  width: var(--w);
+  margin-inline: auto;
+  padding: 0.7rem;
+  border: 1px dashed rgba(243, 236, 230, 0.3);
+  border-radius: 0.9rem;
+}
+.d-grid i { height: 3.2rem; border-radius: 0.6rem; background: linear-gradient(135deg, rgba(196, 24, 42, 0.9), rgba(196, 24, 42, 0.25)); }
+
+/* SEO: الدايرة بتتملي والسكور بيعد */
+.d-seo { display: grid; grid-template-columns: auto 1fr; gap: 1.6rem; align-items: center; }
+.ring { position: relative; width: 9rem; animation: cnt 2.4s ease-out forwards; }
+.ring svg { display: block; rotate: -90deg; }
+.ring circle { fill: none; stroke: rgba(243, 236, 230, 0.1); stroke-width: 9; }
+.ring .ring__fg { stroke: var(--c-hot); stroke-linecap: round; stroke-dasharray: 100; stroke-dashoffset: 100; filter: drop-shadow(0 0 8px var(--c-red)); animation: fill 2.4s ease-out forwards; }
+.score { position: absolute; inset: 0; display: grid; place-items: center; font: 400 2.8rem "Bebas Neue", sans-serif; counter-reset: p var(--p); }
+.score::after { content: counter(p); }
+@keyframes cnt { to { --p: 98; } }
+@keyframes fill { to { stroke-dashoffset: 2; } }
+.d-seo ul { display: grid; gap: 0.7rem; margin: 0; padding: 0; list-style: none; font-size: 0.9rem; font-weight: 700; }
+.d-seo li { opacity: 0; animation: in 0.5s forwards calc(0.6s + var(--i) * 0.4s); }
+.d-seo li::before { content: "✓  "; color: var(--c-hot); }
+@keyframes in { from { opacity: 0; translate: -10px 0; } to { opacity: 1; translate: 0; } }
+
+/* API: الريكوست بيعدّي على كل خطوة */
+.d-api { display: grid; gap: 1.4rem; }
+.d-flow { position: relative; display: flex; justify-content: space-between; }
+.d-flow::before { content: ""; position: absolute; inset: 50% 2.6rem auto; border-top: 1px dashed rgba(243, 236, 230, 0.3); }
+.d-flow span {
+  position: relative;
+  width: 5.2rem;
+  padding: 0.7rem 0;
+  border: 1px solid var(--line);
+  border-radius: 0.7rem;
+  background: #130e10;
+  text-align: center;
+  font-size: 0.72rem;
+  font-weight: 700;
+  animation: lit 5s infinite calc(var(--i) * 1.25s);
+}
+.packet { position: absolute; top: 50%; z-index: 2; width: 0.9rem; height: 0.9rem; border-radius: 50%; translate: -50% -50%; background: var(--c-hot); box-shadow: 0 0 20px var(--c-red); animation: go 5s linear infinite; }
+@keyframes go {
+  0% { left: 2.6rem; opacity: 1; }
+  75% { left: calc(100% - 2.6rem); opacity: 1; }
+  100% { left: calc(100% - 2.6rem); opacity: 0; }
+}
+@keyframes lit {
+  0% { border-color: var(--c-hot); background: rgba(196, 24, 42, 0.4); }
+  35%, 100% { border-color: var(--line); background: #130e10; }
+}
+
+/* Database: الدوكيومنتس بتدخل الكوليكشن */
+.d-db { display: grid; gap: 0.7rem; }
+.d-db pre {
+  margin: 0;
+  padding: 0.7rem 1rem;
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--c-red);
+  border-radius: 0.6rem;
+  background: rgba(243, 236, 230, 0.04);
+  font: 600 0.78rem / 1.5 ui-monospace, monospace;
+  opacity: 0;
+  animation: doc 5s infinite calc(var(--i) * 0.55s);
+}
+@keyframes doc {
+  0% { opacity: 0; translate: 0 16px; }
+  12%, 80% { opacity: 1; translate: 0; }
+  100% { opacity: 0; }
+}
+
+/* Git: الفرع بيتفرع وبيرجع يتدمج */
+.d-git path { fill: none; stroke: rgba(243, 236, 230, 0.55); stroke-width: 3; stroke-linecap: round; stroke-dasharray: 1; stroke-dashoffset: 1; animation: draw 5s ease-in-out infinite; }
+.d-git .br { stroke: var(--c-hot); animation-delay: 0.5s; }
+.d-git circle { fill: var(--c-bone); opacity: 0; animation: pop 5s infinite calc(var(--i) * 0.45s); }
+@keyframes draw { 0% { stroke-dashoffset: 1; } 40%, 85% { stroke-dashoffset: 0; } 100% { stroke-dashoffset: 1; } }
+@keyframes pop { 0%, 4% { opacity: 0; } 12%, 85% { opacity: 1; } 100% { opacity: 0; } }
+
+/* ───────── موبايل ───────── */
+@media (max-width: 980px) {
+  .cat { grid-template-columns: 1fr; margin-bottom: 5rem; }
+  .cat:nth-of-type(even) .demo { order: 0; }
+  .demo { position: relative; top: 0; }
+  .skills__rail { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skills *, .skills *::before, .skills *::after { animation: none !important; transition: none !important; }
+  .bar::after { transform: scaleX(var(--lv)); }
+  .ring .ring__fg { stroke-dashoffset: 2; }
+  .d-seo li, .d-db pre, .d-git circle { opacity: 1; }
+  .d-git path { stroke-dashoffset: 0; }
+}

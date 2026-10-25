@@ -1,0 +1,140 @@
+/* Cairo 500 so Arabic comments match the weight of the Latin body text. */
+@import url("https://fonts.googleapis.com/css2?family=Cairo:wght@500&display=swap");
+
+/* One comment, as a hairline row (like the old "Selected work" rows).
+   Used by the hero ticker (compact) and by the full list. */
+.cmt-card {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  column-gap: 0.85rem;
+  padding: 1.15rem 0;
+  border-bottom: 1px solid rgba(243, 236, 230, 0.18);
+  list-style: none;
+}
+
+.cmt-card__avatar {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  object-fit: cover;
+  background: rgba(243, 236, 230, 0.08);
+  box-shadow: 0 0 0 1px rgba(243, 236, 230, 0.3);
+}
+
+.cmt-card__main {
+  min-width: 0;
+}
+
+.cmt-card__top {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.cmt-card__name {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  min-width: 0;
+  color: var(--bone);
+  font-size: 0.95rem;
+  font-weight: 800;
+  text-decoration: none;
+  overflow-wrap: anywhere;
+}
+
+.cmt-card__name:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.cmt-card__name:focus-visible,
+.cmt-card__delete:focus-visible {
+  outline: 2px solid var(--bone);
+  outline-offset: 3px;
+}
+
+.cmt-card__time {
+  flex: none;
+  color: rgba(243, 236, 230, 0.5);
+  font-size: 0.78rem;
+}
+
+.cmt-card__login {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  color: rgba(243, 236, 230, 0.55);
+  font-size: 0.78rem;
+}
+
+.cmt-card__login svg,
+.cmt-card__name svg {
+  flex: none;
+  width: 0.95em;
+  height: 0.95em;
+}
+
+.cmt-card__body {
+  margin: 0.6rem 0 0;
+  color: rgba(243, 236, 230, 0.86);
+  font: 500 0.95rem/1.65 "Manrope", "Cairo", system-ui, sans-serif;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+/* compact: the hero ticker. Three lines max so every row stays a predictable height. */
+.cmt-card--compact {
+  padding: 0.95rem 0;
+}
+
+.cmt-card--compact .cmt-card__avatar {
+  width: 2.25rem;
+  height: 2.25rem;
+}
+
+.cmt-card--compact .cmt-card__body {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  overflow: hidden;
+  font-size: 0.88rem;
+  line-height: 1.55;
+}
+
+.cmt-card__delete {
+  margin: 0.6rem 0 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: rgba(243, 236, 230, 0.5);
+  font: inherit;
+  font-size: 0.78rem;
+  cursor: pointer;
+}
+
+.cmt-card__delete:hover {
+  color: var(--red-text);
+}
+
+/* The comment you just posted: a red halo around the avatar that fades out. */
+.cmt-card--fresh .cmt-card__avatar {
+  animation: cmt-halo 2.4s ease-out;
+}
+
+@keyframes cmt-halo {
+  from {
+    box-shadow: 0 0 0 1px rgba(243, 236, 230, 0.3), 0 0 0 7px rgba(196, 24, 42, 0.55);
+  }
+  to {
+    box-shadow: 0 0 0 1px rgba(243, 236, 230, 0.3), 0 0 0 7px rgba(196, 24, 42, 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cmt-card--fresh .cmt-card__avatar {
+    animation: none;
+  }
+}
