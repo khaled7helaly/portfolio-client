@@ -2,8 +2,14 @@ import { useRef } from "react";
 import Navbar from "../../app/layouts/Navbar";
 import LanyardBadge from "../../components/Ui/Lanyardbadge/Lanyardbadge";
 import "./Hero.css";
+
 // import cv from '../../../public/cv/khaled_helaly_CV.pdf'
 const PHOTO = "/images/profile/me.webp";
+
+
+/* الصورة من فولدر public — اتأكد من حالة الحروف (Images / Profile) */
+const PHOTO = `${import.meta.env.BASE_URL}images/profile/me.webp`;
+
 
 const STRAP_A = [
   "Full stack developer",
