@@ -1,11 +1,21 @@
 import { useEffect, useRef, useState } from "react";
-import SectionHeader from "../../components/SectionHeader/SectionHeader";
 import { CONTACT } from "../../content/Contact";
+import orderData from "../../data/orderServices.json";
 import "./Contact.css";
+import "./ContactMode.css";
 
-/* لو حطيت endpoint (مثلًا Formspree) في .env باسم VITE_CONTACT_ENDPOINT الفورم هيبعت فعلًا،
-   ولو فاضي الزرار بيفتح تطبيق الإيميل والرسالة جاهزة */
+/* Email: الموقع على GitHub Pages (استضافة ثابتة من غير سيرفر) فالإرسال بيتم عن طريق FormSubmit
+   وبيوصل على CONTACT.email من غير أي إعداد في .env (بس لازم تفعّل الإيميل مرة واحدة).
+   لو عايز خدمة تانية (Formspree مثلًا) حط الـ endpoint في VITE_CONTACT_ENDPOINT وهو اللي هيتستخدم.
+   WhatsApp: بيفتح wa.me برسالة جاهزة. الرقم من CONTACT.whatsapp أو من orderServices.json */
 const ENDPOINT = import.meta.env.VITE_CONTACT_ENDPOINT || "";
+const FORM_URL = ENDPOINT || `https://formsubmit.co/ajax/${CONTACT.email}`;
+const WA_NUMBER = String(CONTACT.whatsapp || orderData.whatsapp.number).replace(/\D/g, "");
+
+const MODES = [
+  { key: "email", label: "Email" },
+  { key: "whatsapp", label: "WhatsApp" },
+];
 
 const iconProps = {
   viewBox: "0 0 24 24",
@@ -37,7 +47,9 @@ const CheckIcon = () => (
 );
 
 export default function Contact() {
-  const [status, setStatus] = useState("idle"); // idle | sending | sent | mailto | error
+  const [mode, setMode] = useState("email"); // email | whatsapp
+  const [status, setStatus] = useState("idle"); // idle | sending | sent | mailto | whatsapp | error
+  const [waLink, setWaLink] = useState("");
   const [copied, setCopied] = useState(false);
   const listRef = useRef(null);
 
@@ -131,6 +143,11 @@ export default function Contact() {
     }
   };
 
+  const changeMode = (next) => {
+    setMode(next);
+    setStatus("idle");
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     const form = e.currentTarget;
@@ -138,39 +155,64 @@ export default function Contact() {
 
     if (company) return; // honeypot: البوتات بتملّي الحقل ده
 
-    if (!ENDPOINT) {
-      const subject = encodeURIComponent(`Project inquiry from ${name}`);
-      const body = encodeURIComponent(`${message}\n\n${name}\n${email}`);
-      window.location.href = `mailto:${CONTACT.email}?subject=${subject}&body=${body}`;
-      setStatus("mailto");
+    /* WhatsApp: بيفتح المحادثة برسالة جاهزة */
+    if (mode === "whatsapp") {
+      if (WA_NUMBER.length < 10) {
+        console.warn("WhatsApp number is not set. Add whatsapp.number in orderServices.json or CONTACT.whatsapp.");
+        setStatus("error");
+        return;
+      }
+
+      const url = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(
+        `Hi Khaled, I'm ${name}.\n\n${message}`
+      )}`;
+
+      setWaLink(url);
+      window.open(url, "_blank", "noopener");
+      setStatus("whatsapp");
       return;
     }
 
+    /* Email: بيتبعت فعلًا في الخلفية من غير ما الزائر يسيب الصفحة */
     setStatus("sending");
     try {
-      const res = await fetch(ENDPOINT, {
+      const payload = { name, email, message, _subject: `New message from ${name}` };
+      if (!ENDPOINT) payload._template = "table"; // خاص بـ FormSubmit
+
+      const res = await fetch(FORM_URL, {
         method: "POST",
         headers: { "Content-Type": "application/json", Accept: "application/json" },
-        body: JSON.stringify({ name, email, message }),
+        body: JSON.stringify(payload),
       });
-      if (!res.ok) throw new Error(res.statusText);
+      const result = await res.json().catch(() => ({}));
+
+      if (!res.ok || result.success === "false" || result.success === false) {
+        throw new Error(result.message || res.statusText);
+      }
+
       form.reset();
       setStatus("sent");
-    } catch {
+    } catch (error) {
+      console.warn("Contact form failed:", error);
       setStatus("error");
     }
   };
 
-  return (
-  <section className="contact" id="contact" aria-label="Contact">
-    <span className="contact__word" aria-hidden="true">CONTACT</span>
-    <div className="contact__inner">
-      <div className="contact__heading">
-        <span className="contact__heading-script">Let's work together</span>
-      </div>
+  const hint =
+    mode === "whatsapp"
+      ? "Opens WhatsApp with your message ready to send."
+      : "Your message goes straight to my inbox.";
 
-      <div className="contact__panel">
-      {/* باقي الكود زي ما هو */}
+  return (
+    <section className="contact" id="contact" aria-label="Contact">
+      <span className="contact__word" aria-hidden="true">CONTACT</span>
+
+      <div className="contact__inner">
+        <div className="contact__heading">
+          <span className="contact__heading-script">Let's work together</span>
+        </div>
+
+        <div className="contact__panel">
           {/* Intro + طرق التواصل */}
           <div className="contact__intro">
             <h3 className="contact__title">Have a project in mind?</h3>
@@ -195,11 +237,7 @@ export default function Contact() {
             </div>
 
             {channels.length > 0 && (
-              <ul
-                className="contact__channels"
-                ref={listRef}
-                aria-label="Profiles and platforms"
-              >
+              <ul className="contact__channels" ref={listRef} aria-label="Profiles and platforms">
                 {channels.map((c) => (
                   <li key={c.label}>
                     <a
@@ -222,6 +260,21 @@ export default function Contact() {
 
           {/* Form */}
           <form className="contact__form" onSubmit={handleSubmit} aria-label="Contact form">
+            <div className="contact__mode" role="group" aria-label="How do you want to reach me?">
+              {MODES.map((item) => (
+                <button
+                  key={item.key}
+                  type="button"
+                  aria-pressed={mode === item.key}
+                  onClick={() => changeMode(item.key)}
+                >
+                  {item.label}
+                </button>
+              ))}
+            </div>
+
+            <p className="contact__hint">{hint}</p>
+
             <div className="contact__field">
               <label className="contact__label" htmlFor="contact-name">
                 Your name
@@ -238,24 +291,26 @@ export default function Contact() {
               />
             </div>
 
-            <div className="contact__field">
-              <label className="contact__label" htmlFor="contact-email">
-                Your email
-              </label>
-              <input
-                className="contact__input"
-                id="contact-email"
-                name="email"
-                type="email"
-                dir="ltr"
-                inputMode="email"
-                autoComplete="email"
-                autoCapitalize="none"
-                spellCheck={false}
-                placeholder="you@example.com"
-                required
-              />
-            </div>
+            {mode === "email" && (
+              <div className="contact__field">
+                <label className="contact__label" htmlFor="contact-email">
+                  Your email
+                </label>
+                <input
+                  className="contact__input"
+                  id="contact-email"
+                  name="email"
+                  type="email"
+                  dir="ltr"
+                  inputMode="email"
+                  autoComplete="email"
+                  autoCapitalize="none"
+                  spellCheck={false}
+                  placeholder="you@example.com"
+                  required
+                />
+              </div>
+            )}
 
             <div className="contact__field">
               <label className="contact__label" htmlFor="contact-message">
@@ -283,12 +338,23 @@ export default function Contact() {
             />
 
             <button className="contact__submit" type="submit" disabled={status === "sending"}>
-              {status === "sending" ? "Sending…" : "Send message"}
+              {status === "sending"
+                ? "Sending…"
+                : mode === "whatsapp"
+                  ? "Open WhatsApp"
+                  : "Send message"}
             </button>
 
             <p className="contact__status" role="status" aria-live="polite">
               {status === "sent" && "Message sent. Thanks, I'll get back to you soon."}
-              {status === "mailto" && "Your email app should open with the message ready."}
+              {status === "whatsapp" && (
+                <>
+                  WhatsApp should open with your message ready.{" "}
+                  <a href={waLink} target="_blank" rel="noopener noreferrer">
+                    Didn't open? Tap here.
+                  </a>
+                </>
+              )}
               {status === "error" && (
                 <>
                   Couldn't send your message. Please email{" "}

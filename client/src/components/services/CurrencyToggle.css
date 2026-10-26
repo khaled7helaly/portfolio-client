@@ -1,0 +1,25 @@
+.currency-toggle {
+  display: inline-flex;
+  padding: 0.2rem;
+  border: 1px solid rgba(243, 236, 230, 0.25);
+  border-radius: 999px;
+}
+
+.currency-toggle button {
+  padding: 0.35rem 0.95rem;
+  border: 0;
+  border-radius: 999px;
+  background: none;
+  color: var(--muted);
+  font: 700 0.78rem var(--font-body);
+  cursor: pointer;
+  transition: background-color var(--transition-fast), color var(--transition-fast);
+}
+
+.currency-toggle button:hover { color: var(--bone); }
+.currency-toggle button[aria-pressed="true"] { background: var(--red); color: #fff; }
+.currency-toggle button:focus-visible { outline: 2px solid var(--bone); outline-offset: 2px; }
+
+@media (prefers-reduced-motion: reduce) {
+  .currency-toggle button { transition: none; }
+}

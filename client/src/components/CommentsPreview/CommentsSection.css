@@ -1,0 +1,199 @@
+/* Full comments section (#comments). Quiet on purpose: the hero ticker is the show. */
+.cmt-section {
+  scroll-margin-top: 4rem; /* keeps the heading clear of the fixed navbar */
+  padding: clamp(5rem, 10vw, 8rem) clamp(1.25rem, 4vw, 3.5rem);
+  color: var(--bone);
+  font-family: "Manrope", "Cairo", system-ui, sans-serif;
+  direction: ltr;
+}
+
+.cmt-section__inner {
+  max-width: 72rem;
+  margin-inline: auto;
+}
+
+/* Same two-voice pairing as "Hello, I am / name" in the hero. */
+.cmt-section__heading {
+  margin: 0 0 clamp(2rem, 5vw, 3.5rem);
+}
+
+.cmt-section__script {
+  display: block;
+  font-family: var(--font-script, cursive);
+  font-size: clamp(2rem, 3.5vw, 3.2rem);
+  font-weight: 400;
+  font-synthesis: none;
+  line-height: 1.1;
+  -webkit-text-stroke: 0.6px currentColor;
+  rotate: -3deg;
+  transform-origin: left bottom;
+}
+
+.cmt-section__title {
+  display: block;
+  margin-top: 0.1em;
+  font-size: clamp(2rem, 4vw, 3.6rem);
+  font-weight: 800;
+  line-height: 1.25;
+  letter-spacing: 0;
+}
+
+.cmt-section__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 22rem) minmax(0, 1fr);
+  gap: clamp(2rem, 6vw, 5rem);
+  align-items: start;
+}
+
+/* ───────── composer ───────── */
+.cmt-composer {
+  position: sticky;
+  top: 6rem;
+  display: grid;
+  gap: 1rem;
+}
+
+.cmt-composer__title {
+  margin: 0;
+  font-size: 1.15rem;
+  font-weight: 800;
+}
+
+.cmt-composer__text {
+  margin: 0;
+  max-width: 24rem;
+  color: rgba(243, 236, 230, 0.7);
+  font-size: 0.95rem;
+  font-weight: 500;
+  line-height: 1.65;
+}
+
+.cmt-composer > .cmt-btn {
+  justify-self: start;
+}
+
+.cmt-composer__who {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.cmt-composer__who img {
+  flex: none;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: 0 0 0 1px rgba(243, 236, 230, 0.3);
+}
+
+.cmt-composer__who strong {
+  display: block;
+  font-size: 0.95rem;
+  font-weight: 800;
+}
+
+.cmt-composer__who span {
+  display: block;
+  color: rgba(243, 236, 230, 0.55);
+  font-size: 0.78rem;
+}
+
+.cmt-composer__out {
+  margin-left: auto;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: rgba(243, 236, 230, 0.6);
+  font: inherit;
+  font-size: 0.82rem;
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+}
+
+.cmt-composer__out:hover {
+  color: var(--bone);
+}
+
+.cmt-composer__field {
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 8.5rem;
+  padding: 0.9rem 1rem;
+  border: 1px solid rgba(243, 236, 230, 0.3);
+  border-radius: 0.6rem;
+  background: rgba(243, 236, 230, 0.04);
+  color: var(--bone);
+  font: 500 0.98rem/1.6 "Manrope", "Cairo", system-ui, sans-serif;
+  resize: vertical;
+}
+
+.cmt-composer__field::placeholder {
+  color: rgba(243, 236, 230, 0.4);
+}
+
+.cmt-composer__field:focus-visible,
+.cmt-composer__out:focus-visible {
+  outline: 2px solid var(--bone);
+  outline-offset: 3px;
+}
+
+.cmt-composer__field:focus-visible {
+  border-color: var(--bone);
+}
+
+.cmt-composer__row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.cmt-composer__count {
+  color: rgba(243, 236, 230, 0.5);
+  font-size: 0.8rem;
+  font-variant-numeric: tabular-nums;
+}
+
+/* min-height reserves the line so the form doesn't jump when a message appears */
+.cmt-composer__note {
+  min-height: 1.3em;
+  margin: 0;
+  color: rgba(243, 236, 230, 0.75);
+  font-size: 0.88rem;
+  line-height: 1.3;
+}
+
+.cmt-composer__note--error {
+  color: var(--red-text);
+}
+
+/* ───────── list ───────── */
+.cmt-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid rgba(243, 236, 230, 0.18);
+}
+
+.cmt-list__note {
+  margin: 0;
+  padding: 1.25rem 0;
+  border-top: 1px solid rgba(243, 236, 230, 0.18);
+  border-bottom: 1px solid rgba(243, 236, 230, 0.18);
+  color: rgba(243, 236, 230, 0.6);
+  font-weight: 500;
+  line-height: 1.6;
+}
+
+@media (max-width: 860px) {
+  .cmt-section__grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .cmt-composer {
+    position: static;
+  }
+}

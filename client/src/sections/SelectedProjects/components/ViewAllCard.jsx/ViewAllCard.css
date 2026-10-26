@@ -1,0 +1,141 @@
+/* View All Projects Card: شريط بخطوط خياطة فوق وتحت */
+
+.view-all-card {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+
+  padding: clamp(1.5rem, 3.5vw, 2.75rem) clamp(1rem, 2.5vw, 2rem);
+
+  color: var(--bone);
+  text-decoration: none;
+
+  background: linear-gradient(
+    105deg,
+    color-mix(in srgb, var(--red) 22%, transparent),
+    color-mix(in srgb, var(--red) 6%, transparent) 55%,
+    transparent
+  );
+
+  transition: border-color var(--transition-normal);
+}
+
+.view-all-card:hover,
+.view-all-card:focus-visible {
+  border-color: var(--red);
+}
+
+.view-all-card:focus-visible {
+  outline: 2px solid var(--bone);
+  outline-offset: 6px;
+}
+
+/* Content */
+
+.view-all-card__title {
+  margin: 0;
+
+  color: var(--bone);
+  font-family: var(--font-display, "Anton", Impact, "Arial Narrow", sans-serif);
+  font-size: clamp(1.8rem, 4vw, 3.2rem);
+  font-weight: 400;
+  letter-spacing: 0.01em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.view-all-card__title span {
+  color: var(--red-text);
+}
+
+.view-all-card__description {
+  max-width: 30rem;
+  margin: 0.75rem 0 0;
+
+  color: var(--muted);
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  line-height: 1.7;
+}
+
+/* Action: نفس التاب المائل بتاع الهيدر */
+
+.view-all-card__action {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  flex-shrink: 0;
+  padding: 1rem 1.6rem 1rem 1.9rem;
+
+  color: var(--bone);
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.view-all-card__action::before,
+.view-all-card__action::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  transform: skewX(-20deg);
+}
+
+.view-all-card__action::before {
+  border: 1px solid rgba(243, 236, 230, 0.35);
+}
+
+.view-all-card__action::after {
+  background: var(--red);
+  transform: skewX(-20deg) scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.view-all-card__arrow {
+  color: var(--red-text);
+  font-size: 1.2rem;
+  line-height: 1;
+
+  transition:
+    color var(--transition-fast),
+    transform var(--transition-fast);
+}
+
+.view-all-card:hover .view-all-card__action::after,
+.view-all-card:focus-visible .view-all-card__action::after {
+  transform: skewX(-20deg) scaleX(1);
+}
+
+.view-all-card:hover .view-all-card__arrow,
+.view-all-card:focus-visible .view-all-card__arrow {
+  color: var(--bone);
+  transform: translate(3px, -3px);
+}
+
+/* Mobile */
+
+@media (max-width: 650px) {
+  .view-all-card {
+    align-items: stretch;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  .view-all-card__action {
+    justify-content: space-between;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .view-all-card,
+  .view-all-card__action::after,
+  .view-all-card__arrow {
+    transition: none;
+  }
+}
